@@ -1,0 +1,16 @@
+---
+# Edition can be 'ce' (Community Edition) or 'ee' (Enterprise Edition).
+docker_edition: "ce"
+docker_package: "docker-{{ docker_edition }}"
+docker_package_state: present
+
+
+# Server is CentOS/RHEl/Fedora
+yum_repository_url: "https://download.docker.com/linux/centos/7/x86_64/stable/"
+
+# Package Repository for Debian
+apt_repository_url: "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
+apt-key: "https://download.docker.com/linux/ubuntu/gpg"
+required_apt_packages: [ 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common']
+ 
+
