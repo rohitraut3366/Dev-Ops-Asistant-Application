@@ -1,13 +1,15 @@
-    import os
-    # release branch /master branch /basa branch
+import os
+
+
+# release branch /master branch /base branch
 def github():
     while True:
         print("""
             Enter 0: To check status of repository
             Enter 1: Initialize the git Repository
-            Enter 2: Track the file. ADD in Statging Area
+            Enter 2: Track the file. ADD in Staging Area
             Enter 3: Commit the Changes
-            Enter 4: Get Time Line : versio [ reference ] Log
+            Enter 4: Get Time Line : version [ reference ] Log
             Enter 5: Check Logs
             Enter 6: RollBack/Rollout the Version
             Enter 7: Show Branch
@@ -22,11 +24,13 @@ def github():
             Enter 16: Show Data at point in time
             Enter 17: To show Diff between two commits
             Enter 18: Discard the changes in file
-            Enter 19: To see author and tree imformation about commit
+            Enter 19: To see author, parent and tree information about commit
             Enter 20: Clone repository
             Enter 21: merge final version of branch [merge(squash)]
             Enter 22: Rebase the branch
-           ##n## Enter 23: Do the cherry-pick[get certain point-in-time backup data]
+            Enter 23: Do the cherry-pick[get certain point-in-time backup data]
+            Enter 24: To do stash Operation
+            Enter 25: Reset commit
         """)
         Directory = input("Enter Repository[ Directory ] location: ")
         os.chdir(Directory)
@@ -36,12 +40,12 @@ def github():
         elif choice == '1':
             os.system("git init")
         elif choice == '2':
-            add_option = input("Enter 1 : Add Spcecific File" 
-                            "Enter 2 : Track All file") 
+            add_option = input("Enter 1 : Add Specific File"
+                               "Enter 2 : Track All file")
             if add_option == '1':
                 os.system("git add .")
             elif add_option == '2':
-                fileName= input("Enter File Name: ")
+                fileName = input("Enter File Name: ")
                 os.system(f"git add {fileName}")
         elif choice == '3':
             commit_message = input()
@@ -65,17 +69,17 @@ def github():
             new_branch = input("Enter new branch name: ")
             os.system(f"git branch {new_branch}")
         elif choice == '10':
-            Branch = input("Enter branch Name:")
+            branch = input("Enter branch Name:")
             is_upstream = input(f"{branch} is upstream branch [y/n]: ")
             if is_upstream == 'n':
-                os.system(f"git merge {Branch}")
+                os.system(f"git merge {branch}")
             elif is_upstream == 'y':
                 os.system(f'git pull')
             else:
                 print('wrong choice')
         elif choice == '11':
-            Branch = input("Enter branch Name:")
-            os.system(f'git branch --set-upstream-to={Branch}')
+            branch = input("Enter branch Name:")
+            os.system(f'git branch --set-upstream-to={branch}')
         elif choice == '12':
             github_repo_url = input("Enter github repository url: ")
             repository_name = input("Enter local Reference Name for repository: ")
@@ -93,9 +97,9 @@ def github():
         elif choice == '14':
             os.system("git remote -v")
         elif choice == '15':
-            remote_resitory = input("Enter remote repository name: ")
+            remote_repository = input("Enter remote repository name: ")
             local_branch = input("Enter local branch")
-            os.system(f"git fetch {origin} {master}")
+            os.system(f"git fetch {local_branch} {remote_repository}")
         elif choice == '16':
             commit_id = input("Enter commit Id: ")
             os.system(f"git show {commit_id}")
@@ -121,5 +125,26 @@ def github():
             os.system(f"git checkout {rebase_branch}")
             os.system("git rebase master")
         elif choice == '23':
-            os.system()
-
+            """
+            master pick/copy the commit data and create it's own new version.
+            """
+            commit_id = input("Enter commit-id from you want to pick the data [Point-in-time data]: ")
+            os.system(f"git cherry-pick {commit_id}")
+        elif choice == '24':
+            print("""
+            Enter 1: Stash [ Store un-committed in stash memory]
+            Enter 2: list stash
+            Enter 3: Restore data from stash memory
+            """)
+            stash_choice = input("Enter your choice: ")
+            if stash_choice == '1':
+                os.system("git stash save")
+            elif stash_choice == '2':
+                os.system("git stash list")
+            elif stash_choice == '3':
+                stash_num = input("Enter stash number: ")
+                os.system("git stash apply stash@{" + f"{stash_num}"+"}")
+        elif choice == '25':
+            reset = input("Enter reset type [hard/soft/mixed]: ")
+            reset_commits = input("Enter number of commits you want to reset: ")
+            os.system(f"git reset --{reset} HEAD~{reset_commits}")
