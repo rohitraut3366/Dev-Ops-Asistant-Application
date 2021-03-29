@@ -1,9 +1,0 @@
----
-# tasks file for Docker
-- name: Debian server
-  include_tasks: ubuntu.yml
-  when: ansible_facts['distribution_file_variety'] == 'Debian'
-
-- name: RedHat,Centos or Fedora Server
-  include_tasks: RedHat.yml
-  when: ansible_facts['distribution'] == 'RedHat'

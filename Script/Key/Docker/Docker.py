@@ -16,7 +16,6 @@ def LocalDockerImage():
         os.system('tput setaf 7')
         choice = input("Enter : ")
         if choice == "1":
-            default = "latest"
             image = input("Enter image  name[os]:version ")
             os.system("docker pull {}".format(image))
         elif choice == "2":
@@ -82,9 +81,8 @@ def RemotedockerImage(username,password,IP):
         os.system('tput setaf 7')
         choice = input("Enter : ")
         if choice == "1":
-            default = "latest"
             image = input("Enter image  name[os]:version ")
-            os.system("sshpass -p {} ssh {}@{} sudo docker pull ".format(username,password,IP,image))
+            os.system("sshpass -p {} ssh {}@{} sudo docker pull {}".format(username,password,IP,image))
         elif choice == "2":
             image = input("Enter image  name[os:version]: ").strip()
             os.system("sshpass -p {} ssh {}@{} sudo docker rmi {}".format(username,password,IP,image))
@@ -147,9 +145,8 @@ def KeyDockerImage(path,username,IP):
         os.system('tput setaf 7')
         choice = input("Enter : ")
         if choice == "1":
-            default = "latest"
             image = input("Enter image  name[os]:version ")
-            os.system("ssh -i  {} {}@{} sudo docker pull ".format(path,username,IP,image))
+            os.system("ssh -i  {} {}@{} sudo docker pull {}".format(path,username,IP,image))
         elif choice == "2":
             image = input("Enter image  name[os:version]: ").strip()
             os.system("ssh -i  {} {}@{} sudo docker rmi {}".format(path,username,IP,image))

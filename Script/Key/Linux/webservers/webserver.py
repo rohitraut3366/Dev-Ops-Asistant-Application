@@ -19,7 +19,7 @@ def localWbs(output):
             print("error")
     else:
         pass
-##################################################
+
 
 
 def remoteWbs(output, usernme, password, ip):
@@ -33,7 +33,7 @@ def remoteWbs(output, usernme, password, ip):
                 os.system("sshpass -p {} ssh {}@{} systemctl start apache2".format(password, usernme, ip))
     else:
         pass
-###################################################
+
 
 
 def cloudWbs(output, username, key, ip):
@@ -47,7 +47,7 @@ def cloudWbs(output, username, key, ip):
                 os.system("ssh -i {} {}@{} systemctl start apache2".format(key, username, ip))
     else:
         pass
-##################################################
+
 
 def LocalwebDocker(output,name):
     if "CentOS" in output:
@@ -70,10 +70,6 @@ def KeywebDocker(path,username,IP,output,name):
         print("This code only support CENTOS")
 
 
-#############################################
-
-
-
 
 def webserverMain():
     while True:
@@ -86,10 +82,8 @@ def webserverMain():
         choice = input("Enter  your choice: ")
         if choice == "1":
             output = os.system("cat /etc/release-os")
-            LocalwebDocker(output)
-
-
-
+            container_name = input("Enter container name/id: ")
+            LocalwebDocker(output, container_name)
         elif choice == "2":
             ip = input("Enter IP address: ")
             username = input("Enter username: ")
@@ -104,10 +98,6 @@ def webserverMain():
                 cloudWbs(output,username,path,ip)
             else:
                 print("Wrong choice")
-
-
-
-
         elif choice == "3":
             vm = input("VM is local/remote where docker is running : ")
             if vm == "local":
@@ -133,4 +123,4 @@ def webserverMain():
             else:
                 print("Wrong choice")
         else:
-            print("Wrong Choice")
+            return
