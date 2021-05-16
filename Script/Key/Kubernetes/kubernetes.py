@@ -1,13 +1,13 @@
 import os
-from Installation.kube_installation import installation
-from Nodes.node import node_service
-from PV.PV import pv_service
-from Pods.Pod import pod_service
-from PVC.PVC import pvc_service
-from ReplicationController.RC import replication_controller_service
-from ReplicationSet.RS import replication_set_service
-from Secret.Secret import secret_service
-from Services.Services import service_service
+from installation.kube_installation import installation
+from nodes.node import node_service
+from persistant_volume.persistant_volume import pv_service
+from pods.pod import pod_service
+from persistant_volume_claim.persistant_volume_claim import pvc_service
+from replication_controller.replication_controller import replication_controller_service
+from replication_set.replica_set import replication_set_service
+from secret.secret import secret_service
+from service.services import service_service
 from configure_client.configure_client import configure_client_service
 from role_role_bindings.role_role_bindings import role_role_bindings_service
 
