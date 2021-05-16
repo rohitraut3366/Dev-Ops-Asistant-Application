@@ -9,6 +9,7 @@ def compute():
         print('''
                 Press 1: EC2
                 Press 2: Elastic BeanStalk
+                Press 3: Exit from this menu
                 ''')
         os.system('tput setaf 7')
         choice = input("\n Enter Your Choice:")
@@ -17,5 +18,7 @@ def compute():
         elif choice == '2':
             pass
         else:
-            print("Wrong choice")
+            if choice != '3':
+                print("Wrong choice")
+            return
         os.system("clear")

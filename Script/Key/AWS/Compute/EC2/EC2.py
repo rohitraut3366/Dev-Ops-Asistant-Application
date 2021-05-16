@@ -7,10 +7,10 @@ def Key():
     while True:
         os.system('tput setaf 4')
         print("""
-        Enter 1 to create Key
-        Enter 2 to delete Key
-        Enter 3 to describe key pairs
-        Enter 4 to exit
+        Press 1: to create Key
+        Press 2: to delete Key
+        Press 3: to describe key pairs
+        Press 4: Exit from this menu
         """)
         os.system('tput setaf 7')
         choice = input("Enter your choice : ")
@@ -36,12 +36,12 @@ def securityGroup():
     while True:
         os.system('tput setaf 4')
         print("""
-        Enter 1 To create security Group
-        Enter 2 To describe security Group
-        Enter 3 To delete security Group
-        Enter 4 To add rule of security Group
-        Enter 5 To delete rule of security Group
-        Enter 6 To exit
+        Press 1: Create security Group
+        Press 2: Describe security Group
+        Press 3: Delete security Group
+        Press 4: Add rule of security Group
+        Press 5: Delete rule of security Group
+        Press 6: Exit from this menu
         """)
         os.system('tput setaf 7')
         choice = input("Enter your choice")
@@ -99,15 +99,15 @@ def volume():
     while True:
         os.system('tput setaf 4')
         print("""
-        Enter 1 To describe volumes
-        Enter 2 To create volumes
-        Enter 3 To delete volume
-        Enter 4 To attach volume
-        Enter 5 To detach volume
-        Enter 6 To modify volume
-        Enter 7 To Transfer volume to other AZ
-        Enter 8 To Transfer volume to Other Region
-        Enter 9 To return
+        Enter 1: Describe volumes
+        Enter 2: Create volumes
+        Enter 3: Delete volume
+        Enter 4: Attach volume
+        Enter 5: Detach volume
+        Enter 6: Modify volume
+        Enter 7: Transfer volume to other AZ
+        Enter 8: Transfer volume to Other Region
+        Press 9: Exit from this menu
             """)
         os.system('tput setaf 7')
         choice = input("Enter your Choice: ")
@@ -162,12 +162,12 @@ def instance():
     while True:
         os.system('tput setaf 4')
         print("""
-            Enter 1 To get information about your instances
-            Enter 2 To launch an EC2 instance
-            Enter 3 To Start an instance
-            Enter 4 To Stop an instance
-            Enter 5 To terminate an instance
-            Enter 6 To exit
+            Press 1: Get information about your instances
+            Press 2: launch an EC2 instance
+            Press 3: Start an instance
+            Press 4: Stop an instance
+            Press 5: Terminate an instance
+            Press 6: Exit from this menu
             """)
         os.system('tput setaf 7')
         choice = input("Enter your choice: ")
@@ -204,19 +204,17 @@ def instance():
 def AMI():
     while True:
         print("""
-        Enter 1 : List All Images
-        Enter 2 : Describe Images
-        Enter 3 : Create Amazon Machine Image
-        Enter 4 : Make Image Public
-        Enter 5 : Make Image Private 
-        Enter 6 : Delete Amazon Machine Image
+        Press 1: Describe Images
+        Press 2: Create Amazon Machine Image
+        Press 3: Make Image Public
+        Press 4: Make Image Private 
+        Press 5: Delete Amazon Machine Image
+        Press 6: Exit from this menu
         """)
         choice = input("Enter your Choice: ")
         if choice == '1':
-            pass
-        elif choice == '2':
             os.system("aws ec2 describe-images --image-ids {}".format(input("Enter image id: ")))
-        elif choice == '1':
+        elif choice == '2':
             instance_id = input("Enter instance id : ")
             ami_name = input("Enter AMI Name: ")
             description = input("Enter Description of  instance : ")
@@ -224,10 +222,12 @@ def AMI():
                 "aws ec2 create-image --instance-id {} --name '{}' --description '{}' --no-reboot".format(instance_id,
                                                                                                           ami_name,
                                                                                                           description))
-        elif choice == '2':
+        elif choice == '3':
             image_id = input("Enter Image ID: ")
             os.system("aws ec2 deregister-image --image-id {}".format(image_id))
         else:
+            if choice != '6':
+                print("Wrong choice")
             return
         input("Enter to continue......")
         os.system("clear")
@@ -269,6 +269,8 @@ def Snapshots():
                 "aws ec2 copy-snapshot --source-region  {} --source-snapshot-id {} --destination-region {} ".format(
                     source_region, source_snapshot, destination_region))
         else:
+            if choice != '6':
+                print("Wrong Choice")
             return
         input("Enter to continue......")
         os.system("clear")
@@ -277,26 +279,26 @@ def Snapshots():
 def ElasticIPS():
     while True:
         print("""
-        Enter 0: Display All IP
-        Enter 1: Allocate ElasticIPS
-        Enter 2: Associate ElasticIPS
-        Enter 3: disassociate-address ElasticIPS
-        Enter 4: release-address ElasticIPS
-        Enter 5: return
+        Enter 1: Display All IP
+        Enter 2: Allocate ElasticIPS
+        Enter 3: Associate ElasticIPS
+        Enter 4: disassociate-address ElasticIPS
+        Enter 5: release-address ElasticIPS
+        Press 6: return
         """)
         choice = input("Enter your choice: ")
-        if choice == '0':
+        if choice == '1':
             os.system("aws ec2 describe-addresses")
-        elif choice == '1':
-            os.system("aws ec2 allocate-address")
         elif choice == '2':
+            os.system("aws ec2 allocate-address")
+        elif choice == '3':
             instance_id = input("instance id: ")
             ipaddress = input("Elastic ip address: ")
             os.system(f"aws ec2 associate-address --instance-id {instance_id} --public-ip {ipaddress}")
-        elif choice == '3':
+        elif choice == '4':
             ipaddress = input("Elastic ip address: ")
             os.system(f"aws ec2 disassociate-address --public-ip {ipaddress}")
-        elif choice == '4':
+        elif choice == '5':
             ipaddress = input("Elastic ip address: ")
             os.system(f"aws ec2 release-address --public-ip {ipaddress}")
         else:
@@ -340,7 +342,7 @@ def EC2Menu():
                 Press 9: FOR Target Groups
                 Press 10: FOR Auto Scaling Launch Configuration
                 Press 11: FOR Auto Scaling Group
-                Press 12: TO RETURN
+                Press 12: RETURN
                 ''')
         os.system('tput setaf 7')
         choice = input("\n Enter Your Choice:")
