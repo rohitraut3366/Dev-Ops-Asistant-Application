@@ -71,5 +71,3 @@ def installation():
         os.system(f"ansible-playbook setup.yml")
     os.chdir(os.getcwd() + "/../")
 
-
-installation()
