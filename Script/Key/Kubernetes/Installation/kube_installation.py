@@ -1,18 +1,6 @@
 import os
 
 
-def change_dir_to_apply_play(dir, playbook_name, cmd):
-
-    from distutils.spawn import find_executable
-
-    os.chdir(os.getcwd() + f"/{dir}")
-    if find_executable(f"{cmd}") is None:
-        os.system(f"ansible-playbook {playbook_name}")
-
-    os.chdir(os.getcwd() + "/../")
-    return
-
-
 def installation():
     from distutils.spawn import find_executable
 
