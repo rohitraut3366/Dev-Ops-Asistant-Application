@@ -1,7 +1,7 @@
 import os
 
 
-def replication_controller_service(namespace):
+def replication_controller_service(namespace='default'):
     while True:
         print("""
         Enter 0: RUN YAML FILE
