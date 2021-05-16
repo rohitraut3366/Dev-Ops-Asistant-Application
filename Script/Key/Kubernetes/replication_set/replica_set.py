@@ -1,7 +1,7 @@
 import os
 
 
-def replication_set_service(namespace):
+def replication_set_service(namespace='default'):
     while True:
         print("""
         Press 0: RUN YAML FILE
