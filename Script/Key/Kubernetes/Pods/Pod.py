@@ -15,7 +15,7 @@ def pod_service(namespace='default'):
         Enter 8: Delete Pod
         Enter 9: Delete All Pods
         Enter 10: see Logs of Pod
-        Enter 10: To Exit 
+        Enter 11: To Exit 
         """)
         choice = input("Enter your choice: ")
         if choice == '0':
@@ -54,4 +54,6 @@ def pod_service(namespace='default'):
             pod_name = input("Enter pod_name: ")
             os.system(f'kubectl logs pod {pod_name} -n {namespace}')
         else:
+            if choice != "11":
+                print("Wrong Choice")
             return
