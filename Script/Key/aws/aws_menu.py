@@ -1,20 +1,22 @@
 import os
 
-from Compute.EC2.EC2 import EC2Menu
+from compute.compute import compute
 
 
-def compute():
+def Aws():
+
+    os.system("aws configure")
     while True:
         os.system('tput setaf 4')
         print('''
-                Press 1: EC2
-                Press 2: Elastic BeanStalk
+                Press 1: Compute
+                Press 2: Networking and Content Deliver
                 Press 3: Exit from this menu
                 ''')
         os.system('tput setaf 7')
         choice = input("\n Enter Your Choice:")
         if choice == '1':
-            EC2Menu()
+            compute()    
         elif choice == '2':
             pass
         else:
@@ -22,3 +24,4 @@ def compute():
                 print("Wrong choice")
             return
         os.system("clear")
+Aws()

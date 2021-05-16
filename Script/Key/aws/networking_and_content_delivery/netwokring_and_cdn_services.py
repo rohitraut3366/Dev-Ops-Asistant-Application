@@ -1,7 +1,7 @@
 import os
-from CloudFront import CloudFront
+from cloud_front import cloud_front
 from Route53 import Route53
-from VPC import VPC
+from vpc import vpc
 
 while True:
     print("""
@@ -11,10 +11,10 @@ while True:
     """)
     choice = input("Enter your Choice: 1")
     if choice == '1':
-        CloudFront.cloudFront()
+        cloud_front.cloudFront()
     elif choice == '2':
         Route53.Route53()
     elif choice == '3':
-        VPC.VPC()
+        vpc.VPC()
     else:
         exit(0)
