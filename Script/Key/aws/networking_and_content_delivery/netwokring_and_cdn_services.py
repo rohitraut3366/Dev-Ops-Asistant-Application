@@ -1,4 +1,4 @@
-from Route53 import Route53
+from route53 import route53
 from cloud_front import cloud_front
 from vpc import vpc
 
@@ -12,7 +12,7 @@ while True:
     if choice == '1':
         cloud_front.cloudFront()
     elif choice == '2':
-        Route53.Route53()
+        route53.Route53()
     elif choice == '3':
         vpc.VPC()
     else:
