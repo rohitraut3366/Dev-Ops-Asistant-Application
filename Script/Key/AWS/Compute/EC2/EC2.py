@@ -1,17 +1,19 @@
+import json
 import os
+import subprocess
 
 
 def Key():
     while True:
         os.system('tput setaf 4')
         print("""
-                Enter 1 to create Key
-                Enter 2 to delete Key
-                Enter 3 to describe key pairs
-                Enter 4 to exit
-            """)
+        Enter 1 to create Key
+        Enter 2 to delete Key
+        Enter 3 to describe key pairs
+        Enter 4 to exit
+        """)
         os.system('tput setaf 7')
-        choice = input("        Enter your choice : ")
+        choice = input("Enter your choice : ")
         if choice == "1":
             key_name = input("\t\tEnter Key-name: ")
             os.system(
@@ -45,8 +47,8 @@ def securityGroup():
         choice = input("Enter your choice")
         if choice == '1':
             description = input("Enter Description of sg : ")
-            Group_name = input("Enter sg group Name : ")
-            os.system("aws ec2  create-security-group --description {} --group-name {}".format(description, Group_name))
+            group_name = input("Enter sg group Name : ")
+            os.system("aws ec2  create-security-group --description {} --group-name {}".format(description, group_name))
         elif choice == '2':
             os.system("aws ec2 describe-security-groups")
         elif choice == '3':
@@ -103,7 +105,9 @@ def volume():
         Enter 4 To attach volume
         Enter 5 To detach volume
         Enter 6 To modify volume
-        Enter 7 To exit
+        Enter 7 To Transfer volume to other AZ
+        Enter 8 To Transfer volume to Other Region
+        Enter 9 To return
             """)
         os.system('tput setaf 7')
         choice = input("Enter your Choice: ")
@@ -130,7 +134,23 @@ def volume():
             size = input("Enter size: ")
             volume_id = input("Enter Volume ID: ")
             os.system("aws ec2 modify-volume --volume-id {} --size {}".format(volume_id, size))
-        elif choice == "7":
+        elif choice == "7" or choice == "8":
+            volume_id = input("Enter Volume ID: ")
+            output = json.loads(subprocess.getout('aws ec2 describe-volumes --volume-ids {}'.format(volume_id)))
+            if choice == "7":
+                az = input("Enter availability zone: ")
+                os.system("aws ec2 create-volume --availability-zone {} --snapshot-id {}".format(az,
+                                                                                                 output["Volumes"][0][
+                                                                                                     'SnapshotId']))
+            if choice == '8':
+                source_region = input("Enter source region : ")
+                source_snapshot = input("Enter source snapshot id: ")
+                destination_region = input("Enter destination region: ")
+                os.system(
+                    "aws ec2 copy-snapshot --source-region  {} --source-snapshot-id {} --destination-region {} ".format(
+                        source_region, source_snapshot, destination_region))
+            subprocess.getout("aws")
+        elif choice == "9":
             return
         else:
             print("Wrong Choice")
@@ -182,41 +202,107 @@ def instance():
 
 
 def AMI():
-    print("""
-    Enter 1 : List All Images
-    Enter 2: Describe Images
-    Enter 3 : Create Amazon Machine Image
-    Enter 4 : Make Image Public
-    Enter 5: Make Image Private 
-    Enter 6 : Delete Amazon Machine Image
-    """)
-    choice = input("Enter your Choice: ")
-    if choice == '1':
-        pass
-    elif choice == '2':
-        pass
-    elif choice == '1':
-        instance_id = input("Enter instance id : ")
-        ami_name = input("Enter AMI Name: ")
-        description = input("Enter Description of  instance : ")
-        os.system("aws ec2 create-image --instance-id {} --name '{}' --description '{}' --no-reboot".format(instance_id, ami_name, description))
-    elif choice == '2':
-        image_id = input("Enter Image ID: ")
-        os.system("aws ec2 deregister-image --image-id {}".format(image_id))
-    else:
-        print("Wrong Choice")
+    while True:
+        print("""
+        Enter 1 : List All Images
+        Enter 2 : Describe Images
+        Enter 3 : Create Amazon Machine Image
+        Enter 4 : Make Image Public
+        Enter 5 : Make Image Private 
+        Enter 6 : Delete Amazon Machine Image
+        """)
+        choice = input("Enter your Choice: ")
+        if choice == '1':
+            pass
+        elif choice == '2':
+            os.system("aws ec2 describe-images --image-ids {}".format(input("Enter image id: ")))
+        elif choice == '1':
+            instance_id = input("Enter instance id : ")
+            ami_name = input("Enter AMI Name: ")
+            description = input("Enter Description of  instance : ")
+            os.system(
+                "aws ec2 create-image --instance-id {} --name '{}' --description '{}' --no-reboot".format(instance_id,
+                                                                                                          ami_name,
+                                                                                                          description))
+        elif choice == '2':
+            image_id = input("Enter Image ID: ")
+            os.system("aws ec2 deregister-image --image-id {}".format(image_id))
+        else:
+            return
+        input("Enter to continue......")
+        os.system("clear")
 
 
 def Snapshots():
-    print("""
-    Enter 1 : Create Snapshot
-    Enter 2 : Delete Snapshot
-    Enter 3 : 
-    """)
+    while True:
+        print("""
+            Press 1: Display All Snapshot
+            Press 2: Display snapshot attribute
+            Press 3: create-snapshot
+            Press 4: delete-snapshot
+            Press 5: copy-snapshot
+            Press 6: return
+        """)
+        choice = input("Enter your choice: ")
+        if choice == '1':
+            os.system("aws ec2 describe-snapshots")
+        elif choice == '2':
+            attribute = input("Enter attribute : ")
+            snapshot_id = input("Enter snapshot_id: ")
+            os.system(
+                "aws ec2 describe-snapshot-attributes --attribute {}   --snapshot-id {}".format(attribute, snapshot_id))
+        elif choice == '3':
+            volume_id = input("volume_id : ")
+            description = input("Snapshot description: ")
+            key, value = input("Enter tag key and value: eg key=value ").split("=")
+            os.system(
+                f"aws ec2 create-snapshot --volume-id {volume_id} --description {description} --tag-specifications "
+                f"'ResourceType=snapshot,Tags=[Key={key}, Value={value}]'")
+        elif choice == '4':
+            snapshot_id = input("Enter snapshot_id: ")
+            os.system(f"aws ec2 delete-snapshot --snapshot-id {snapshot_id}")
+        elif choice == '5':
+            source_region = input("Enter source region : ")
+            source_snapshot = input("Enter source snapshot id: ")
+            destination_region = input("Enter destination region: ")
+            os.system(
+                "aws ec2 copy-snapshot --source-region  {} --source-snapshot-id {} --destination-region {} ".format(
+                    source_region, source_snapshot, destination_region))
+        else:
+            return
+        input("Enter to continue......")
+        os.system("clear")
 
 
 def ElasticIPS():
-    pass
+    while True:
+        print("""
+        Enter 0: Display All IP
+        Enter 1: Allocate ElasticIPS
+        Enter 2: Associate ElasticIPS
+        Enter 3: disassociate-address ElasticIPS
+        Enter 4: release-address ElasticIPS
+        Enter 5: return
+        """)
+        choice = input("Enter your choice: ")
+        if choice == '0':
+            os.system("aws ec2 describe-addresses")
+        elif choice == '1':
+            os.system("aws ec2 allocate-address")
+        elif choice == '2':
+            instance_id = input("instance id: ")
+            ipaddress = input("Elastic ip address: ")
+            os.system(f"aws ec2 associate-address --instance-id {instance_id} --public-ip {ipaddress}")
+        elif choice == '3':
+            ipaddress = input("Elastic ip address: ")
+            os.system(f"aws ec2 disassociate-address --public-ip {ipaddress}")
+        elif choice == '4':
+            ipaddress = input("Elastic ip address: ")
+            os.system(f"aws ec2 release-address --public-ip {ipaddress}")
+        else:
+            return
+        input("Enter to continue......")
+        os.system("clear")
 
 
 def NetworkInterfaces():
@@ -237,3 +323,51 @@ def AutoScalingLaunchConfiguration():
 
 def AutoScalingGroups():
     pass
+
+
+def EC2Menu():
+    while True:
+        os.system('tput setaf 4')
+        print('''
+                Press 1: FOR KEY PAIR
+                Press 2: FOR SECURITY GROUP	
+                Press 3: FOR EC2 INSTANCES
+                Press 4: FOR VOLUMES
+                Press 5: FOR AMI
+                Press 6: FOR Snapshot
+                Press 7: FOR Elastic IPS
+                Press 8: FOR Network InterFaces
+                Press 9: FOR Target Groups
+                Press 10: FOR Auto Scaling Launch Configuration
+                Press 11: FOR Auto Scaling Group
+                Press 12: TO RETURN
+                ''')
+        os.system('tput setaf 7')
+        choice = input("\n Enter Your Choice:")
+        if choice == '1':
+            Key()
+        elif choice == '2':
+            securityGroup()
+        elif choice == '3':
+            instance()
+        elif choice == '4':
+            volume()
+        elif choice == '5':
+            AMI()
+        elif choice == '6':
+            Snapshots()
+        elif choice == '7':
+            ElasticIPS()
+        elif choice == '8':
+            NetworkInterfaces()
+        elif choice == '9':
+            TargetGroups()
+        elif choice == '10':
+            AutoScalingLaunchConfiguration()
+        elif choice == '11':
+            AutoScalingGroups()
+        elif choice == '12':
+            return
+        else:
+            print("Wrong choice")
+        os.system("clear")
