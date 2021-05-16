@@ -1,6 +1,5 @@
-import os
-from cloud_front import cloud_front
 from Route53 import Route53
+from cloud_front import cloud_front
 from vpc import vpc
 
 while True:
