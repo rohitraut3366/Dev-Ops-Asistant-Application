@@ -12,8 +12,8 @@ def LocalHadoopInstall():
     if not subprocess.getstatusoutput("sudo yum install initscripts -y")[0]:
         if not subprocess.getstatusoutput("pip3 install gdown")[0]:
             if not os.system(
-                    "sudo wget https://rohitraut04.s3.ap-south-1.amazonaws.com/hadoop-1.2.1-1.x86_64.rpm") and 0 == os.system(
-                "sudo wget https://rohitraut04.s3.ap-south-1.amazonaws.com/jdk-8u171-linux-x64.rpm"):
+                    "sudo wget https://rohitraut04.s3.ap-south-1.amazonaws.com/hadoop-1.2.1-1.x86_64.rpm") and \
+                    0 == os.system("sudo wget https://rohitraut04.s3.ap-south-1.amazonaws.com/jdk-8u171-linux-x64.rpm"):
                 os.system("sudo rpm -ihv  jdk-8u171-linux-x64.rpm")
                 status = os.system("sudo rpm -ihv hadoop-1.2.1-1.x86_64.rpm --force")
 
@@ -207,7 +207,8 @@ def CloudNodeConfigure(current_type, username, key_path, Ip):
                                                                                                        username, Ip,
                                                                                                        username)) and not os.system(
             "ssh -i {} {}@{} sudo cp core-site.xml /etc/hadoop/core-site.xml".format(key_path, username,
-                                                    Ip)) and not os.system("ssh -i {} {}@{} sudo rm core-site.xml".format(key_path, username, Ip)):
+                                                                                     Ip)) and not os.system(
+            "ssh -i {} {}@{} sudo rm core-site.xml".format(key_path, username, Ip)):
             pass
         else:
             return False
@@ -218,7 +219,8 @@ def CloudNodeConfigure(current_type, username, key_path, Ip):
                                                                                                                Ip,
                                                                                                                username)) and not os.system(
             "ssh -i {} {}@{} sudo cp hdfs-site.xml /etc/hadoop/hdfs-site.xml".format(key_path, username,
-                                           Ip)) and not os.system("ssh -i {} {}@{} sudo rm hdfs-site.xml".format(key_path, username, Ip)):
+                                                                                     Ip)) and not os.system(
+            "ssh -i {} {}@{} sudo rm hdfs-site.xml".format(key_path, username, Ip)):
             return True
     elif current_type == "DataNode":
         if not os.system(
@@ -226,7 +228,8 @@ def CloudNodeConfigure(current_type, username, key_path, Ip):
                                                                                                        username, Ip,
                                                                                                        username)) and not os.system(
             "ssh -i {} {}@{} sudo cp core-site.xml /etc/hadoop/core-site.xml".format(key_path, username,
-                        Ip)) and not os.system("ssh -i {} {}@{} sudo rm core-site.xml".format(key_path, username, Ip)):
+                                                                                     Ip)) and not os.system(
+            "ssh -i {} {}@{} sudo rm core-site.xml".format(key_path, username, Ip)):
             pass
         else:
             return False
@@ -237,15 +240,17 @@ def CloudNodeConfigure(current_type, username, key_path, Ip):
                                                                                                                Ip,
                                                                                                                username)) and not os.system(
             "ssh -i {} {}@{} sudo cp hdfs-site.xml /etc/hadoop/hdfs-site.xml".format(key_path, username,
-                                             Ip)) and not os.system("ssh -i {} {}@{} sudo rm hdfs-site.xml".format(key_path, username, Ip)):
+                                                                                     Ip)) and not os.system(
+            "ssh -i {} {}@{} sudo rm hdfs-site.xml".format(key_path, username, Ip)):
             return True
     else:
         if not os.system(
                 "scp -i {}  BIGDATA/templates/core-site/datanode/core-site.xml {}@{}:/home/{}/".format(key_path,
                                                                                                        username, Ip,
                                                                                                        username)) and not os.system(
-                "ssh -i {} {}@{} sudo cp core-site.xml /etc/hadoop/core-site.xml".format(key_path, username,
-                            Ip)) and not os.system("ssh -i {} {}@{} sudo rm core-site.xml".format(key_path, username, Ip)):
+            "ssh -i {} {}@{} sudo cp core-site.xml /etc/hadoop/core-site.xml".format(key_path, username,
+                                                                                     Ip)) and not os.system(
+            "ssh -i {} {}@{} sudo rm core-site.xml".format(key_path, username, Ip)):
             pass
         else:
             return False
@@ -254,7 +259,8 @@ def CloudNodeConfigure(current_type, username, key_path, Ip):
                                                                                                     Ip,
                                                                                                     username)) and not os.system(
             "ssh -i {} {}@{} sudo cp hdfs-site.xml /etc/hadoop/hdfs-site.xml".format(key_path, username,
-                        Ip)) and not os.system("ssh -i {} {}@{} sudo rm hdfs-site.xml".format(key_path, username, Ip)):
+                                                                                     Ip)) and not os.system(
+            "ssh -i {} {}@{} sudo rm hdfs-site.xml".format(key_path, username, Ip)):
             return True
     return False
 
@@ -263,7 +269,8 @@ def CloudNodeConfigure(current_type, username, key_path, Ip):
 
 def CloudCurrentNode(username, key_path, Ip):
     os.system('tput setaf 4')
-    print("\n\t\t\tCurrent system is.....\n\t\t\tEnter 1 For NameNode\n\t\t\tEnter 2 For DataNode\n\t\t\tEnter 3 For Client\n\t\t\tEnter 4 to return back")
+    print(
+        "\n\t\t\tCurrent system is.....\n\t\t\tEnter 1 For NameNode\n\t\t\tEnter 2 For DataNode\n\t\t\tEnter 3 For Client\n\t\t\tEnter 4 to return back")
     os.system('tput setaf 7')
     choice = input("\t\t\tEnter your Choice: ")
     if choice == "1":
@@ -300,11 +307,13 @@ def HadoopMainMenu():
     print("\t\t=====================================================")
     os.system('tput setaf 4')
 
-    ostype = input("""\n\t\tEnter local to work on local operating system\n\t\tEnter remote to work on remote operating system\n\t\t:""")
+    ostype = input(
+        """\n\t\tEnter local to work on local operating system\n\t\tEnter remote to work on remote operating system\n\t\t:""")
     if ostype == "local":
         while True:
             os.system('tput setaf 4')
-            print("\n\t\tEnter 1 to install hadoop\n\t\tEnter 2 to configure node\n\t\tEnter 3 to format name-node\n\t\tEnter 4 to start/stop hadoop service"
+            print(
+                "\n\t\tEnter 1 to install hadoop\n\t\tEnter 2 to configure node\n\t\tEnter 3 to format name-node\n\t\tEnter 4 to start/stop hadoop service"
                 "\n\t\tEnter 5 to get cluster report\n\t\tEnter 6 to  see all files\n\t\tEnter 7 to put/rm/read File\n\t\tEnter 8 to return")
 
             os.system('tput setaf 7')
@@ -363,8 +372,9 @@ def HadoopMainMenu():
             os.system("yum install sshpass")
             while True:
                 os.system('tput setaf 4')
-                print("\n\t\tEnter 1 to install hadoop\n\t\tEnter 2 for configure node\n\t\tEnter 3 to format name-node\n\t\tEnter 4 for start/stop hadoop service"
-                "\n\t\tEnter 5 for get cluster report\n\t\tEnter 6 to see all files in cluster\n\t\tEnter 7 to put/rm/read File\n\t\tEnter 8 to return")
+                print(
+                    "\n\t\tEnter 1 to install hadoop\n\t\tEnter 2 for configure node\n\t\tEnter 3 to format name-node\n\t\tEnter 4 for start/stop hadoop service"
+                    "\n\t\tEnter 5 for get cluster report\n\t\tEnter 6 to see all files in cluster\n\t\tEnter 7 to put/rm/read File\n\t\tEnter 8 to return")
                 os.system('tput setaf 7')
                 choice = input("\t\tEnter you choice : ")
                 if choice == "1":
