@@ -1,16 +1,12 @@
 import os
 
-from compute.elastic_compute.elastic_compute import EC2Menu
+from key_script.aws.compute.elastic_compute.elastic_compute import EC2Menu
 
 
 def compute():
     while True:
         os.system('tput setaf 4')
-        print('''
-                Press 1: EC2
-                Press 2: Elastic BeanStalk
-                Press 3: Exit from this menu
-                ''')
+        print('''\t\tPress 1: EC2\n\t\tPress 2: Elastic BeanStalk\n\t\tPress 3: Exit from this menu''')
         os.system('tput setaf 7')
         choice = input("\n Enter Your Choice:")
         if choice == '1':
@@ -19,6 +15,6 @@ def compute():
             pass
         else:
             if choice != '3':
-                print("Wrong choice")
+                print("\t\tWrong choice")
             return
         os.system("clear")
