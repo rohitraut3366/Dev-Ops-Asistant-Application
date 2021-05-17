@@ -8,7 +8,7 @@ import os
 def LocalDockerImage():
     while True:
         os.system('tput setaf 4')
-        print("""\t\tEnter 1 to pullEnter 2 to remove image\n\t\tEnter 3 to docker manu""")
+        print("""\n\t\tEnter 1 to pullEnter 2 to remove image\n\t\tEnter 3 to docker menu""")
         os.system('tput setaf 7')
         choice = input("\t\tEnter : ")
         if choice == "1":
@@ -28,9 +28,8 @@ def LocalDockerImage():
 def LocalDockerContainer():
     while True:
         os.system('tput setaf 4')
-        print("""\t\tEnter 1 to see running containers\n\t\tEnter 2 to see all containers\n\t\tEnter 3 to create 
-        container\n\t\tEnter 4 to delete container \t\tEnter 5 to stop container\n\t\tEnter 6 to start 
-        container\n\t\tEnter 7 to docker menu""")
+        print(
+            "\n\t\tEnter 1 to see running containers\n\t\tEnter 2 to see all containers\n\t\tEnter 3 to create container\n\t\tEnter 4 to delete container\n\t\tEnter 5 to stop container\n\t\tEnter 6 to start container\n\t\tEnter 7 to docker menu")
         os.system('tput setaf 7')
         choice = input("\t\tEnter your choice : ")
         if choice == '1':
@@ -64,7 +63,7 @@ def LocalDockerContainer():
 def RemotedockerImage(username, password, IP):
     while True:
         os.system('tput setaf 4')
-        print("""\t\tEnter 1 to pull\n\t\tEnter 2 to remove image\n\t\tEnter 3 to docker menu""")
+        print("""\n\t\tEnter 1 to pull\n\t\tEnter 2 to remove image\n\t\tEnter 3 to docker menu""")
         os.system('tput setaf 7')
         choice = input("\t\tEnter : ")
         if choice == "1":
@@ -84,7 +83,7 @@ def RemotedockerImage(username, password, IP):
 def RemoteDockerContainer(username, password, IP):
     while True:
         os.system('tput setaf 4')
-        print("""\t\tEnter 1 to see running containers\n\t\tEnter 2 to see all containers\n\t\tEnter 3 to create container\n\t\tEnter 4 to delete container\n\t\tEnter 5 to stop container
+        print("""\n\t\tEnter 1 to see running containers\n\t\tEnter 2 to see all containers\n\t\tEnter 3 to create container\n\t\tEnter 4 to delete container\n\t\tEnter 5 to stop container
         \t\tEnter 6 to start container\n\t\tEnter 7 to docker menu""")
         os.system('tput setaf 7')
         choice = input("\t\tEnter: ")
@@ -120,7 +119,7 @@ def RemoteDockerContainer(username, password, IP):
 def KeyDockerImage(path, username, IP):
     while True:
         os.system('tput setaf 4')
-        print("""\t\tEnter 1 to pull\n\t\tEnter 2 to remove image\n\t\tEnter 3 to docker menu""")
+        print("""\n\t\tEnter 1 to pull\n\t\tEnter 2 to remove image\n\t\tEnter 3 to docker menu""")
         os.system('tput setaf 7')
         choice = input("\t\tEnter : ")
         if choice == "1":
@@ -140,9 +139,9 @@ def KeyDockerImage(path, username, IP):
 def KeyDockerContainer(path, username, IP):
     while True:
         os.system('tput setaf 4')
-        print("""\t\tEnter 1 to see running containers\n\t\tEnter 2 to see all containers\n\t\tEnter 3 to create container
-        \n\t\tEnter 4 to delete container
-        Enter 5 to stop container\n\t\tEnter 6 to start container\n\t\tEnter 7 to docker menu""")
+        print(
+            "\n\t\tEnter 1 to see running containers\n\t\tEnter 2 to see all containers\n\t\tEnter 3 to create container"
+            "\n\t\tEnter 4 to delete container\n\t\tEnter 5 to stop container\n\t\tEnter 6 to start container\n\t\tEnter 7 to docker menu")
         os.system('tput setaf 7')
         choice = input("\t\tEnter: ")
         if choice == '1':
@@ -176,9 +175,9 @@ def KeyDockerContainer(path, username, IP):
 def LocalDockerMenu():
     while True:
         os.system('tput setaf 4')
-        print("\t\tEnter 1 to install docker\n\t\tEnter 2 to check docker info\n\t\tEnter 3 to work with Container "
-              "Images "
-              "\t\tEnter 4 to container operations\n\t\tEnter 5 to main menu")
+        print(
+            "\n\t\tEnter 1 to install docker\n\t\tEnter 2 to check docker info\n\t\tEnter 3 to work with Container Images "
+            "\n\t\tEnter 4 to container operations\n\t\tEnter 5 to main menu")
         os.system('tput setaf 7')
         choice = input("\t\tEnter your choice: ")
         if choice == "1":
@@ -200,9 +199,8 @@ def LocalDockerMenu():
 def remotePassMEnu(username, password, IP):
     while True:
         os.system('tput setaf 4')
-        print("\t\tEnter 1 to install docker\n\t\tEnter 2 to check docker info\n\t\tEnter 3 to work with Container "
-              "Images "
-              "Enter 4 to container operations\n\t\tEnter 5 to main menu")
+        print("\n\t\tEnter 1 to install docker\n\t\tEnter 2 to check docker info\n\t\tEnter 3 to work with Container Images "
+            "\n\t\tEnter 4 to container operations\n\t\tEnter 5 to main menu")
         os.system('tput setaf 7')
         choice = input("\t\tEnter your choice: ")
         if choice == "1":
@@ -224,9 +222,8 @@ def remotePassMEnu(username, password, IP):
 def keyDockerOS(path, username, IP):
     while True:
         os.system('tput setaf 4')
-        print("\t\tEnter 1 to install docker\n\t\tEnter 2 to check docker info\n\t\tEnter 3 to work with Container "
-              "Images "
-              "\n\t\tEnter 4 to container operations\n\t\tEnter 5 to main menu")
+        print("\t\tEnter 1 to install docker\n\t\tEnter 2 to check docker info\n\t\tEnter 3 to work with Container Images "
+            "\n\t\tEnter 4 to container operations\n\t\tEnter 5 to main menu")
         os.system('tput setaf 7')
         IP = input("\t\tEnter IP")
         username = input("\t\tEnter username: ")
