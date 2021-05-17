@@ -1,23 +1,53 @@
 import getpass
 import os
+from distutils.spawn import find_executable
 
-
+"""
+35.154.213.32
+/root/Desktop/FYProject/script/key_script/kubernetes/installation/Ansible/ARTH.pem
+"""
 ########################################
+def docker_installation_service(username='root', ip='localhost', password="", key=""):
+
+    if password != '':
+        with open("Ansible/inventory", "w+") as inventory:
+            inventory.write(f"{ip} ansible_user={username} ansible_ssh_pass={password}\n")
+    elif key != '':
+        with open("Ansible/inventory", "w+") as inventory:
+            inventory.write(f"{ip} ansible_user={username} ansible_ssh_private_key_file={key}\n")
+    elif password is '' and key is '' and ip is 'localhost':
+        with open("Ansible/inventory", "w+") as inventory:
+            inventory.write(f"{ip} ansible_connection=local\n")
+    else:
+        print("wrong info")
+        return
+
+    os.chdir(os.getcwd() + '/Ansible')
+
+    if not find_executable("ansible") is None:
+        os.system(f"ansible-playbook setup.yml")
+    else:
+        os.system(f"ansible-playbook setup.yml")
+
+    os.chdir(os.getcwd() + "/../")
 
 
-def LocalDockerImage():
+def local_docker_image():
     while True:
         os.system('tput setaf 4')
-        print("""\n\t\tEnter 1 to pullEnter 2 to remove image\n\t\tEnter 3 to docker menu""")
+        print("""\n\t\tEnter 1 to list\n\t\tEnter 2 to pull\n\t\tEnter 3 to remove image\n\t\tEnter 4 to docker menu""")
         os.system('tput setaf 7')
+
         choice = input("\t\tEnter : ")
-        if choice == "1":
+        if choice == '1':
+            os.system("docker images")
+        if choice == "2":
             image = input("\t\tEnter image  name[os]:version ")
             os.system("docker pull {}".format(image))
-        elif choice == "2":
+        elif choice == "3":
             image = input("\t\tEnter image  name[os:version]: ").strip()
             os.system("docker rmi {}".format(image))
-        elif choice == "3":
+        elif choice == "4":
             return
         else:
             print("\t\twrong choice")
@@ -25,7 +55,7 @@ def LocalDockerImage():
         os.system("clear")
 
 
-def LocalDockerContainer():
+def local_docker_container_service():
     while True:
         os.system('tput setaf 4')
         print(
@@ -59,13 +89,15 @@ def LocalDockerContainer():
 
 ####################################################
 # PassOS#
-#####################################################3
-def RemotedockerImage(username, password, IP):
+#####################################################
+def remote_docker_Image_service(username, password, IP):
     while True:
         os.system('tput setaf 4')
-        print("""\n\t\tEnter 1 to pull\n\t\tEnter 2 to remove image\n\t\tEnter 3 to docker menu""")
+        print("""\n\t\tEnter 1 to list\n\t\tEnter 2 to pull\n\t\tEnter 3 to remove image\n\t\tEnter 4 to docker menu""")
         os.system('tput setaf 7')
-        choice = input("\t\tEnter : ")
+
+        choice = input("\n\t\tEnter : ")
+
         if choice == "1":
             image = input("\t\tEnter image  name[os]:version ")
             os.system("sshpass -p {} ssh {}@{} sudo docker pull {}".format(username, password, IP, image))
@@ -76,11 +108,12 @@ def RemotedockerImage(username, password, IP):
             return
         else:
             print("\t\twrong choice")
+
         input("\t\tEnter to continue..")
         os.system("clear")
 
 
-def RemoteDockerContainer(username, password, IP):
+def remote_docker_container_service(username, password, IP):
     while True:
         os.system('tput setaf 4')
         print("""\n\t\tEnter 1 to see running containers\n\t\tEnter 2 to see all containers\n\t\tEnter 3 to create container\n\t\tEnter 4 to delete container\n\t\tEnter 5 to stop container
@@ -116,7 +149,7 @@ def RemoteDockerContainer(username, password, IP):
 ############################################
 # KeyOS#
 ############################################
-def KeyDockerImage(path, username, IP):
+def key_docker_Image_service(path, username, IP):
     while True:
         os.system('tput setaf 4')
         print("""\n\t\tEnter 1 to pull\n\t\tEnter 2 to remove image\n\t\tEnter 3 to docker menu""")
@@ -136,7 +169,7 @@ def KeyDockerImage(path, username, IP):
         os.system("clear")
 
 
-def KeyDockerContainer(path, username, IP):
+def key_docker_container_service(path, username, IP):
     while True:
         os.system('tput setaf 4')
         print(
@@ -172,22 +205,22 @@ def KeyDockerContainer(path, username, IP):
 #############################################################
 # MainMenu#
 ##############################################################
-def LocalDockerMenu():
+def local_docker_menu():
     while True:
         os.system('tput setaf 4')
         print(
             "\n\t\tEnter 1 to install docker\n\t\tEnter 2 to check docker info\n\t\tEnter 3 to work with Container Images "
             "\n\t\tEnter 4 to container operations\n\t\tEnter 5 to main menu")
         os.system('tput setaf 7')
-        choice = input("\t\tEnter your choice: ")
+        choice = input("\n\t\tEnter your choice: ")
         if choice == "1":
-            os.system("yum install docker-ce --nobest")
+            docker_installation_service(username=input("\t\tuser-name: "))
         elif choice == '2':
             os.system("docker info")
         elif choice == '3':
-            LocalDockerImage()
+            local_docker_image()
         elif choice == '4':
-            LocalDockerContainer()
+            local_docker_container_service()
         elif choice == '5':
             return
         else:
@@ -196,21 +229,24 @@ def LocalDockerMenu():
         os.system("clear")
 
 
-def remotePassMEnu(username, password, IP):
+def remote_pass_menu(username, password, IP):
     while True:
         os.system('tput setaf 4')
-        print("\n\t\tEnter 1 to install docker\n\t\tEnter 2 to check docker info\n\t\tEnter 3 to work with Container Images "
+        print(
+            "\n\t\tEnter 1 to install docker\n\t\tEnter 2 to check docker info\n\t\tEnter 3 to work with Container Images "
             "\n\t\tEnter 4 to container operations\n\t\tEnter 5 to main menu")
         os.system('tput setaf 7')
-        choice = input("\t\tEnter your choice: ")
+
+        choice = input("\n\t\tEnter your choice: ")
         if choice == "1":
-            os.system("sshpass -p {} ssh {}@{} sudo yum install docker-ce --nobest".format(password, username, IP))
+            docker_installation_service(username=username, ip=IP, password=password)
+
         elif choice == '2':
             os.system("sshpass -p {} ssh {}@{} sudo docker info".format(password, username, IP))
         elif choice == '3':
-            RemotedockerImage(username, password, IP)
+            remote_docker_Image_service(username, password, IP)
         elif choice == '4':
-            RemotedockerImage(username, password, IP)
+            remote_docker_Image_service(username, password, IP)
         elif choice == '5':
             return
         else:
@@ -219,24 +255,23 @@ def remotePassMEnu(username, password, IP):
         os.system("clear")
 
 
-def keyDockerOS(path, username, IP):
+def key_docker_os(path, username, IP):
     while True:
         os.system('tput setaf 4')
-        print("\t\tEnter 1 to install docker\n\t\tEnter 2 to check docker info\n\t\tEnter 3 to work with Container Images "
+        print(
+            "\t\tEnter 1 to install docker\n\t\tEnter 2 to check docker info\n\t\tEnter 3 to work with Container Images "
             "\n\t\tEnter 4 to container operations\n\t\tEnter 5 to main menu")
         os.system('tput setaf 7')
-        IP = input("\t\tEnter IP")
-        username = input("\t\tEnter username: ")
-        path = input("\t\tEnter key [keypath/key.pem] : ")
-        choice = input("\t\tEnter your choice: ")
+
+        choice = input("\n\t\tEnter your choice: ")
         if choice == "1":
-            os.system("ssh -i {} {}@{} sudo yum install docker-ce --nobest".format(path, username, IP))
+            docker_installation_service(username=username, ip=IP, key=path)
         elif choice == '2':
             os.system("ssh -i {} {}@{} sudo docker info".format(path, username, IP))
         elif choice == '3':
-            KeyDockerImage(path, username, IP)
+            key_docker_Image_service(path, username, IP)
         elif choice == '4':
-            KeyDockerContainer(path, username, IP)
+            key_docker_container_service(path, username, IP)
         elif choice == '5':
             return
         else:
@@ -245,22 +280,22 @@ def keyDockerOS(path, username, IP):
         os.system("clear")
 
 
-def dockerMain():
-    ostype = input("\n\t\tEnter local to work on local operating system\n"
+def docker_main():
+    os_type = input("\n\t\tEnter local to work on local operating system\n"
                    "\t\tEnter remote to work on remote operating system\n"
                    "\t\t:")
-    if ostype == "local":
-        LocalDockerMenu()
-    elif ostype == 'remote':
+    if os_type == "local":
+        local_docker_menu()
+    elif os_type == 'remote':
         IP = input("\t\tEnter IP Address : ")
         username = input("\t\tEnter username : ")
         key_or_pass = input("\t\tLogin using Key or password : ")
         if key_or_pass == "password":
             password = getpass.getpass()
-            remotePassMEnu(username, password, IP)
+            remote_pass_menu(username, password, IP)
         elif key_or_pass.lower() == "key":
             path = input("\t\tEnter key path [path/key.pem] : ")
-            keyDockerOS(path, username, IP)
+            key_docker_os(path, username, IP)
         else:
             print("\t\tWrong Choice")
     else:
