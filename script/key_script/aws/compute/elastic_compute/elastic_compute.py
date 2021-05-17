@@ -6,10 +6,11 @@ import subprocess
 def Key():
     while True:
         os.system('tput setaf 4')
-        print("""\t\t\t\tPress 1: to create Key\n\t\t\t\tPress 2: to delete Key
-        \n\t\t\t\tPress 3: to describe key pairs\n\t\t\t\tPress 4: Exit from this menu""")
+        print(
+            """\n\n\t\t\t\tPress 1: to create Key\n\t\t\t\tPress 2: to delete Key\n\t\t\t\tPress 3: to describe key pairs\n\t\t\t\tPress 4: Exit from this menu""")
         os.system('tput setaf 7')
-        choice = input("\t\t\t\tEnter your choice : ")
+
+        choice = input("\n\t\t\t\tEnter your choice : ")
         if choice == "1":
             key_name = input("\t\t\t\tEnter Key-name: ")
             os.system(
@@ -31,11 +32,12 @@ def Key():
 def securityGroup():
     while True:
         os.system('tput setaf 4')
-        print("""\t\t\t\tPress 1: Create security Group\n\t\t\t\tPress 2: Describe security Group
+        print("""\n\n\t\t\t\tPress 1: Create security Group\n\t\t\t\tPress 2: Describe security Group
 \t\t\t\tPress 3: Delete security Group\n\t\t\t\tPress 4: Add rule of security Group
 \t\t\t\tPress 5: Delete rule of security Group\n\t\t\t\tPress 6: Exit from this menu""")
         os.system('tput setaf 7')
-        choice = input("\t\t\t\tEnter your choice")
+
+        choice = input("\n\t\t\t\tEnter your choice: ")
         if choice == '1':
             description = input("\t\t\t\tEnter Description of sg : ")
             group_name = input("\t\t\t\tEnter sg group Name : ")
@@ -63,7 +65,7 @@ def securityGroup():
             else:
                 print("\t\t\t\tWrong Choice")
         elif choice == '5':
-            print("\t\t\t\tEnter 1 for ingress \n\t\t\t\tEnter 2 for egress")
+            print("\n\n\t\t\t\tEnter 1 for ingress \n\t\t\t\tEnter 2 for egress")
             delete = input("\t\t\t\tEnter your choice : ")
             security_id = input("\t\t\t\tEnter security id: ")
             protocol = input("\t\t\t\tEnter protocol: ")
@@ -89,12 +91,13 @@ def securityGroup():
 def volume():
     while True:
         os.system('tput setaf 4')
-        print('\t\t\t\tEnter 1: Describe volumes\n\t\t\t\tEnter 2: Create volumes\n\t\t\t\tEnter 3: Delete volume'
+        print('\n\n\t\t\t\tEnter 1: Describe volumes\n\t\t\t\tEnter 2: Create volumes\n\t\t\t\tEnter 3: Delete volume'
               '\n\t\t\t\tEnter 4: Attach volume\n\t\t\t\tEnter 5: Detach volume\n\t\t\t\tEnter 6: Modify '
               'volume\n\t\t\t\tEnter 7: Transfer volume to other AZ '
               '\n\t\t\t\tEnter 8: Transfer volume to Other Region\n\t\t\t\tPress 9: Exit from this menu')
         os.system('tput setaf 7')
-        choice = input("\t\t\t\tEnter your Choice: ")
+
+        choice = input("\n\t\t\t\tEnter your Choice: ")
         if choice == "1":
             os.system("aws ec2 describe-volumes")
         elif choice == "2":
@@ -145,15 +148,13 @@ def volume():
 def instance():
     while True:
         os.system('tput setaf 4')
-        print("\n\t\t\t\tPress 1: Get information about your instances"
-              "\n\t\t\t\tPress 2: launch an EC2 instance"
-              "\n\t\t\t\tPress 3: Start an instance"
-              "\n\t\t\t\tPress 4: Stop an instance"
-              "\n\t\t\t\tPress 5: Terminate an instance"
-              "\n\t\t\t\tPress 6: Exit from this menu")
+        print(
+            "\n\n\n\t\t\t\tPress 1: Get information about your instances\n\t\t\t\tPress 2: launch an EC2 instance\n\t\t\t\tPress 3: Start an instance\n\t\t\t\tPress 4: Stop an instance"
+            "\n\t\t\t\tPress 5: Terminate an instance\n\t\t\t\tPress 6: Exit from this menu")
 
         os.system('tput setaf 7')
-        choice = input("\t\t\t\tEnter your choice: ")
+
+        choice = input("\n\t\t\t\tEnter your choice: ")
         if choice == "1":
             os.system("aws ec2 describe-instances")
         elif choice == "2":
@@ -178,21 +179,22 @@ def instance():
             Id = input("\t\t\t\tEnter instance id: ")
             os.system("aws ec2 terminate-instances --instance-ids {}".format(Id))
         else:
-            print("\t\t\t\tWrong Choice")
+            if choice != '6':
+                print("\t\t\t\tWrong Choice")
             return
-        input("\t\t\t\tEnter to continue......")
+        input("\t\t\t\tEnter to continue...")
         os.system("clear")
 
 
 def AMI():
     while True:
-        print("\t\t\t\tPress 1: Describe Images"
-              "\n\t\t\t\tPress 2: Create Amazon Machine Image"
-              "\n\t\t\t\tPress 3: Make Image Public"
-              "\n\t\t\t\tPress 4: Make Image Private"
-              "\n\t\t\t\tPress 5: Delete Amazon Machine Image"
-              "\n\t\t\t\tPress 6: Exit from this menu")
-        choice = input("\t\t\t\tEnter your Choice: ")
+        os.system('tput setaf 4')
+        print(
+            "\n\n\t\t\t\tPress 1: Describe Images\n\t\t\t\tPress 2: Create Amazon Machine Image\n\t\t\t\tPress 3: Make Image Public"
+            "\n\t\t\t\tPress 4: Make Image Private\n\t\t\t\tPress 5: Delete Amazon Machine Image\n\t\t\t\tPress 6: Exit from this menu")
+        os.system('tput setaf 7')
+
+        choice = input("\n\t\t\t\tEnter your Choice: ")
         if choice == '1':
             os.system("aws ec2 describe-images --image-ids {}".format(input("Enter image id: ")))
         elif choice == '2':
@@ -216,10 +218,13 @@ def AMI():
 
 def Snapshots():
     while True:
-        print("\t\t\t\tPress 1: Display All Snapshot\n\t\t\t\tPress 2: Display snapshot attribute\n\t\t\t\tPress 3: "
-              "create-snapshot\n\t\t\t\tPress 4: delete-snapshot "
-              "\n\t\t\t\tPress 5: copy-snapshot\n\t\t\t\tPress 6: return")
-        choice = input("\t\t\t\tEnter your choice: ")
+        os.system('tput setaf 4')
+        print(
+            "\n\n\t\t\t\tPress 1: Display All Snapshot\n\t\t\t\tPress 2: Display snapshot attribute\n\t\t\t\tPress 3: create-snapshot\n\t\t\t\tPress 4: delete-snapshot "
+            "\n\t\t\t\tPress 5: copy-snapshot\n\t\t\t\tPress 6: return")
+        os.system('tput setaf 7')
+
+        choice = input("\n\t\t\t\tEnter your choice: ")
         if choice == '1':
             os.system("aws ec2 describe-snapshots")
         elif choice == '2':
@@ -248,16 +253,19 @@ def Snapshots():
             if choice != '6':
                 print("\t\t\t\tWrong Choice")
             return
-        input("\t\t\t\tEnter to continue......")
+        input("\t\t\t\tEnter to continue...")
         os.system("clear")
 
 
 def ElasticIPS():
     while True:
-        print("Enter 1: Display All IP\n\t\t\t\tEnter 2: Allocate ElasticIPS\n\t\t\t\tEnter 3: Associate "
-              "ElasticIPS\n\t\t\t\tEnter 4: disassociate-address ElasticIPS "
-              "\n\t\t\t\tEnter 5: release-address ElasticIPS\n\t\t\t\tPress 6: return")
-        choice = input("\t\t\t\tEnter your choice: ")
+        os.system('tput setaf 4')
+        print(
+            "\n\t\t\t\tEnter 1: Display All IP\n\t\t\t\tEnter 2: Allocate ElasticIPS\n\t\t\t\tEnter 3: Associate ElasticIPS\n\t\t\t\tEnter 4: disassociate-address ElasticIPS "
+            "\n\t\t\t\tEnter 5: release-address ElasticIPS\n\t\t\t\tPress 6: return")
+        os.system('tput setaf 7')
+
+        choice = input("\n\t\t\t\tEnter your choice: ")
         if choice == '1':
             os.system("aws ec2 describe-addresses")
         elif choice == '2':
@@ -279,35 +287,40 @@ def ElasticIPS():
 
 
 def NetworkInterfaces():
+    os.system("clear")
     pass
 
 
 def LoadBalancers():
+    os.system("clear")
     pass
 
 
 def TargetGroups():
+    os.system("clear")
     pass
 
 
 def AutoScalingLaunchConfiguration():
+    os.system("clear")
     pass
 
 
 def AutoScalingGroups():
+    os.system("clear")
     pass
 
 
 def EC2Menu():
     while True:
         os.system('tput setaf 4')
-        print('''\t\t\tPress 1: FOR KEY PAIR\n\t\t\tPress 2: FOR SECURITY GROUP	\n\t\t\tPress 3: FOR EC2 INSTANCE
+        print('''\n\n\t\t\tPress 1: FOR KEY PAIR\n\t\t\tPress 2: FOR SECURITY GROUP	\n\t\t\tPress 3: FOR EC2 INSTANCE
 \t\t\tPress 4: FOR VOLUMES\n\t\t\tPress 5: FOR AMI\n\t\t\tPress 6: FOR Snapshot\n\t\t\tPress 7: FOR Elastic IPS
 \t\t\tPress 8: FOR Network InterFaces\n\t\t\tPress 9: FOR Target Groups\n\t\t\tPress 10: FOR Auto Scaling Launch Configuration
 \t\t\tPress 11: FOR Auto Scaling Group\n\t\t\tPress 12: RETURN
             ''')
         os.system('tput setaf 7')
-        choice = input("\t\t\tEnter Your Choice:")
+        choice = input("\n\t\t\tEnter Your Choice:")
         if choice == '1':
             Key()
         elif choice == '2':
@@ -334,4 +347,5 @@ def EC2Menu():
             return
         else:
             print("\t\t\t\tWrong choice")
+        input("\t\t\t\tEnter to continue...")
         os.system("clear")
