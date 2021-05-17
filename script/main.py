@@ -1,10 +1,10 @@
 import getpass
 
-from script.key_script.aws.aws_menu import Aws
-from script.key_script.docker.docker import dockerMain
-from script.key_script.hadoop.hadoop import HadoopMainMenu
-from script.key_script.kubernetes.kubernetes import kube_menu
-from script.key_script.linux.linux_menu import linux
+from key_script.aws.aws_menu import Aws
+from key_script.docker.docker import dockerMain
+from key_script.hadoop.hadoop import HadoopMainMenu
+from key_script.kubernetes.kubernetes import kube_menu
+from key_script.linux.linux_menu import linux
 
 password = getpass.getpass()
 if password != "123":
@@ -15,13 +15,13 @@ if path.lower() == 'voice':
 elif path.lower() == 'keyboard':
     while True:
         print("""
-        Press 1 : AWS
-        Press 2 : Docker
-        Press 3 : Hadoop
-        Press 4 : Kubernetes
-        Press 5 : Linux/web server
+Press 1 : AWS
+Press 2 : Docker
+Press 3 : Hadoop
+Press 4 : Kubernetes
+Press 5 : Linux/web server
         """)
-        choice = int(input("Enter your choice: "))
+        choice = input("Enter your choice: ")
         if choice == '1':
             Aws()
         elif choice == '2':

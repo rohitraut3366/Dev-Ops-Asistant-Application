@@ -295,20 +295,20 @@ def CloudCurrentNode(username, key_path, Ip):
 
 def HadoopMainMenu():
     os.system('tput setaf 3')
-    print("\t\t\t=====================================================")
-    print("\t\t\t\tWelcome to Hadoop menu !!")
-    print("\t\t\t=====================================================")
+    print("\t\t=====================================================")
+    print("\t\t\tWelcome to Hadoop menu !!")
+    print("\t\t=====================================================")
     os.system('tput setaf 4')
 
-    ostype = input("""\n\t\t\tEnter local to work on local operating system\n\t\t\tEnter remote to work on remote operating system\n\t\t\t:""")
+    ostype = input("""\n\t\tEnter local to work on local operating system\n\t\tEnter remote to work on remote operating system\n\t\t:""")
     if ostype == "local":
         while True:
             os.system('tput setaf 4')
-            print("\n\t\t\tEnter 1 to install hadoop\n\t\t\tEnter 2 to configure node\n\t\t\tEnter 3 to format name-node\n\t\t\tEnter 4 to start/stop hadoop service"
-                "\n\t\t\tEnter 5 to get cluster report\n\t\t\tEnter 6 to  see all files\n\t\t\tEnter 7 to put/rm/read File\n\t\t\tEnter 8 to return")
+            print("\n\t\tEnter 1 to install hadoop\n\t\tEnter 2 to configure node\n\t\tEnter 3 to format name-node\n\t\tEnter 4 to start/stop hadoop service"
+                "\n\t\tEnter 5 to get cluster report\n\t\tEnter 6 to  see all files\n\t\tEnter 7 to put/rm/read File\n\t\tEnter 8 to return")
 
             os.system('tput setaf 7')
-            choice = input("\t\t\tEnter your choice: ")
+            choice = input("\t\tEnter your choice: ")
 
             if choice == "1":
                 LocalHadoopInstall()
@@ -317,64 +317,56 @@ def HadoopMainMenu():
             elif choice == '3':
                 os.system("hadoop namenode -format")
             elif choice == "4":
-                s = input("\t\t\tEnter start/stop hadoop service : ")
+                s = input("\t\tEnter start/stop hadoop service : ")
                 if s == "start":
-                    service = input("\t\t\tservice NameNode/Datanode : ")
+                    service = input("\t\tservice NameNode/Datanode : ")
                     if service.lower() == "namenode":
                         os.system("hadoop-daemon.sh start namenode")
                     elif service.lower() == "datanode":
                         os.system("hadoop-daemon.sh start datanode")
                 elif s == "stop":
-                    service = input("\t\t\tservice NameNode/Datanode : ")
+                    service = input("\t\tservice NameNode/Datanode : ")
                     if service.lower() == "namenode":
                         os.system("hadoop-daemon.sh stop namenode")
                     elif service.lower() == "datanode":
                         os.system("hadoop-daemon.sh stop datanode")
                 else:
-                    print("\t\t\twrong input ")
+                    print("\t\twrong input ")
             elif choice == "5":
                 os.system("hadoop dfsadmin -report")
             elif choice == "6":
                 os.system("hadoop fs -ls /")
             elif choice == "7":
-                c = input("\t\t\tEnter put/rm/read File")
+                c = input("\t\tEnter put/rm/read File")
                 if c.lower() == 'put':
-                    file_name = input("\t\t\tEnter file name [PATH/filename] : ")
+                    file_name = input("\t\tEnter file name [PATH/filename] : ")
                     os.system("hadoop fs -put {} /".format(file_name))
                 elif c.lower() == "rm":
-                    file_name = input("\t\t\tEnter File name : ")
+                    file_name = input("\t\tEnter File name : ")
                     os.system("hadoop fs -rm /{}".format(file_name))
                 elif c.lower() == "read":
-                    file_name = input("\t\t\tEnter file name : ")
+                    file_name = input("\t\tEnter file name : ")
                     os.system("hadoop fs -cat /{}".format(file_name))
             elif choice == "8":
                 return
             else:
-                print("\t\t\tnot supported")
-            input("\t\t\tPress Enter to continue........")
+                print("\t\tnot supported")
+            input("\t\tPress Enter to continue........")
             os.system('clear')
 
     elif ostype == "remote":
-        username = input("\t\t\tEnter os username : ").strip()
-        ip = input("\t\t\tEnter os ip: ").strip()
-        key_or_password = input("\t\t\tConnect using password/Key : ").strip()
+        username = input("\t\tEnter os username : ").strip()
+        ip = input("\t\tEnter os ip: ").strip()
+        key_or_password = input("\t\tConnect using password/Key : ").strip()
         if key_or_password.lower() == "password" or key_or_password == "pass":
             password = getpass.getpass("Enter password: ")
             os.system("yum install sshpass")
             while True:
                 os.system('tput setaf 4')
-                print("""
-                Enter 1 to install hadoop
-                Enter 2 for configure node
-                Enter 3 to format namenode
-                Enter 4 for start/stop hadoop service
-                Enter 5 for get cluster report
-                Enter 6 to see all files in cluster
-                Enter 7 to put/rm/read File
-                Enter 8 to return
-                """)
+                print("\n\t\tEnter 1 to install hadoop\n\t\tEnter 2 for configure node\n\t\tEnter 3 to format name-node\n\t\tEnter 4 for start/stop hadoop service"
+                "\n\t\tEnter 5 for get cluster report\n\t\tEnter 6 to see all files in cluster\n\t\tEnter 7 to put/rm/read File\n\t\tEnter 8 to return")
                 os.system('tput setaf 7')
-                choice = input("Enter you choice : ")
+                choice = input("\t\tEnter you choice : ")
                 if choice == "1":
                     RemoteHadoopInstall(username, password, ip)
                 elif choice == "2":
@@ -383,20 +375,20 @@ def HadoopMainMenu():
                     os.system(
                         "sshpass -p {} ssh {}@{} hadoop namenode -format".format(password, username, ip))
                 elif choice == "4":
-                    s = input("Enter start/stop hadoop service : ")
+                    s = input("\t\tEnter start/stop hadoop service : ")
                     if s == "start":
-                        service = input("service NameNode/Datanode : ")
+                        service = input("\t\tservice NameNode/Datanode : ")
                         if service.lower() == "namenode":
                             os.system(
                                 "sshpass -p {} ssh {}@{} hadoop-daemon.sh start namenode".format(password, username,
                                                                                                  ip))
-                            os.system('sleep 3')
+                            os.system('sleep 5')
                             service_state = subprocess.getstatusoutput(
                                 "sshpass -p {} ssh {}@{} sudo jps".format(password, username, ip))
                             if service_state[0] == 0 and 'NameNode' in service_state[1]:
-                                print("NameNode Started")
+                                print("\t\tNameNode Started")
                             else:
-                                print("failed to start service")
+                                print("\t\tfailed to start service")
                         elif service.lower() == "datanode":
                             os.system(
                                 "sshpass -p {} ssh {}@{} hadoop-daemon.sh start datanode".format(password, username,
@@ -405,13 +397,13 @@ def HadoopMainMenu():
                             service_state = subprocess.getstatusoutput(
                                 "sshpass -p {} ssh {}@{} sudo jps".format(password, username, ip))
                             if service_state[0] == 0 and 'DataNode' in service_state[1]:
-                                print("DataNode Started")
+                                print("\t\tDataNode Started")
                             else:
-                                print("failed to start service")
+                                print("\t\tfailed to start service")
                         else:
-                            print("Wrong Input")
+                            print("\t\tWrong Input")
                     elif s == "stop":
-                        service = str(input("service NameNode/Datanode:"))
+                        service = input("\t\tservice NameNode/Datanode:")
                         if service.lower() == "namenode":
                             os.system(
                                 "sshpass -p {} ssh {}@{} hadoop-daemon.sh stop namenode".format(password, username, ip))
@@ -419,9 +411,9 @@ def HadoopMainMenu():
                             os.system(
                                 "sshpass -p {} ssh {}@{} hadoop-daemon.sh stop datanode".format(password, username, ip))
                         else:
-                            print("Wrong Input")
+                            print("\t\tWrong Input")
                     else:
-                        print("wrong input ")
+                        print("\t\twrong input ")
                 elif choice == '5':
                     os.system(
                         "sshpass -p {} ssh {}@{} hadoop dfsadmin -report".format(password, username, ip))
@@ -429,26 +421,26 @@ def HadoopMainMenu():
                     os.system(
                         "sshpass -p {} ssh {}@{} hadoop fs -ls /".format(password, username, ip))
                 elif choice == "7":
-                    c = input("Enter put/rm/read File")
+                    c = input("\t\tEnter put/rm/read File")
                     if c.lower() == 'put':
-                        file_name = input("Enter file name [PATH/filename] : ")
+                        file_name = input("\t\tEnter file name [PATH/filename] : ")
                         os.system(
                             "sshpass -p {} ssh {}@{} hadoop fs -put {} /".format(password, username, ip, file_name))
                     elif c.lower() == "rm":
-                        file_name = input("Enter File name : ")
+                        file_name = input("\t\tEnter File name : ")
                         os.system("sshpass -p {} ssh {}@{} hadoop fs -rm /{}".format(password, username, ip, file_name))
                     elif c.lower() == "read":
-                        file_name = input("Enter file name : ")
+                        file_name = input("\t\tEnter file name : ")
                         os.system(
                             "sshpass -p {} ssh {}@{} hadoop fs -cat /{}".format(password, username, ip, file_name))
                 elif choice == '9':
                     exit()
-            else:
-                print("not supported")
-            input("Press Enter to continue........")
-            os.system('clear')
+                else:
+                    print("\t\tnot supported")
+                input("\t\tPress Enter to continue........")
+                os.system('clear')
         elif key_or_password.lower() == "key":
-            key = input("Enter key in this format { PATH/KeyName.pem } : ")
+            key = input("\t\tEnter key in this format { PATH/KeyName.pem } : ")
             while True:
                 os.system('tput setaf 4')
                 print(
