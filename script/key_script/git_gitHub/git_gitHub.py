@@ -109,9 +109,8 @@ def github():
             commit_id = input("\t\tEnter commit-id from you want to pick the data [Point-in-time data]: ")
             os.system(f"git cherry-pick {commit_id}")
         elif choice == '24':
-            print("\n\t\tEnter 1: Stash [ Store un-committed in stash memory]\n\t\tEnter 2: list stash\n\t\tEnter 3: "
-                  "Restore data from stash memory")
-            stash_choice = input("\t\tEnter your choice: ")
+            print("\n\t\tEnter 1: Stash [ Store un-committed in stash memory]\n\t\tEnter 2: list stash\n\t\tEnter 3: Restore data from stash memory")
+            stash_choice = input("\n\t\tEnter your choice: ")
             if stash_choice == '1':
                 os.system("git stash save")
             elif stash_choice == '2':
