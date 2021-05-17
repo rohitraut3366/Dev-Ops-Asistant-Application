@@ -1,5 +1,5 @@
-import os
 import getpass
+import os
 
 
 ########################################
@@ -50,7 +50,7 @@ def LocalDockerContainer():
         elif choice == '3':
             name = input("Enter name: ")
             osname = input("Enter image [:]")
-            os.system("docker  run  -dit --name {}  {}".format(name,osname))
+            os.system("docker  run  -dit --name {}  {}".format(name, osname))
         elif choice == '4':
             name = input("Enter name/ID: ")
             os.system("docker rm -f {}".format(name))
@@ -67,10 +67,11 @@ def LocalDockerContainer():
         input("Enter to contine..")
         os.system("clear")
 
+
 ####################################################
-            #PassOS#
+# PassOS#
 #####################################################3
-def RemotedockerImage(username,password,IP):
+def RemotedockerImage(username, password, IP):
     while True:
         os.system('tput setaf 4')
         print("""
@@ -82,10 +83,10 @@ def RemotedockerImage(username,password,IP):
         choice = input("Enter : ")
         if choice == "1":
             image = input("Enter image  name[os]:version ")
-            os.system("sshpass -p {} ssh {}@{} sudo docker pull {}".format(username,password,IP,image))
+            os.system("sshpass -p {} ssh {}@{} sudo docker pull {}".format(username, password, IP, image))
         elif choice == "2":
             image = input("Enter image  name[os:version]: ").strip()
-            os.system("sshpass -p {} ssh {}@{} sudo docker rmi {}".format(username,password,IP,image))
+            os.system("sshpass -p {} ssh {}@{} sudo docker rmi {}".format(username, password, IP, image))
         elif choice == "3":
             return
         else:
@@ -94,7 +95,7 @@ def RemotedockerImage(username,password,IP):
         os.system("clear")
 
 
-def RemoteDockerContainer(username,password,IP):
+def RemoteDockerContainer(username, password, IP):
     while True:
         os.system('tput setaf 4')
         print("""
@@ -115,26 +116,29 @@ def RemoteDockerContainer(username,password,IP):
         elif choice == '3':
             name = input("Enter name: ")
             osname = input("Enter image [:]")
-            os.system("sshpass -p {} ssh {}@{} sudo docker run -dit --name {} {}".format(password,username,IP,name,osname))
+            os.system("sshpass -p {} ssh {}@{} sudo docker run -dit --name {} {}".format(password, username, IP, name,
+                                                                                         osname))
         elif choice == '4':
             name = input("Enter name/ID: ")
-            os.system("sshpass -p {} ssh {}@{} sudo docker rm -f {}".format(password,username,IP,name))
+            os.system("sshpass -p {} ssh {}@{} sudo docker rm -f {}".format(password, username, IP, name))
         elif choice == '5':
             name = input("Enter name/ID: ")
-            os.system("sshpass -p {} ssh {}@{} sudo docker stop {}".format(password,username,IP,name))
+            os.system("sshpass -p {} ssh {}@{} sudo docker stop {}".format(password, username, IP, name))
         elif choice == '6':
             name = input("Enter name/ID: ")
-            os.system("sshpass -p {} ssh {}@{} sudo docker start {}".format(password,username,IP,name))
+            os.system("sshpass -p {} ssh {}@{} sudo docker start {}".format(password, username, IP, name))
         elif choice == '7':
             return
         else:
             print("Wrong choice")
         input("Enter to contine..")
         os.system("clear")
+
+
 ############################################
-            #KeyOS#
+# KeyOS#
 ############################################
-def KeyDockerImage(path,username,IP):
+def KeyDockerImage(path, username, IP):
     while True:
         os.system('tput setaf 4')
         print("""
@@ -146,10 +150,10 @@ def KeyDockerImage(path,username,IP):
         choice = input("Enter : ")
         if choice == "1":
             image = input("Enter image  name[os]:version ")
-            os.system("ssh -i  {} {}@{} sudo docker pull {}".format(path,username,IP,image))
+            os.system("ssh -i  {} {}@{} sudo docker pull {}".format(path, username, IP, image))
         elif choice == "2":
             image = input("Enter image  name[os:version]: ").strip()
-            os.system("ssh -i  {} {}@{} sudo docker rmi {}".format(path,username,IP,image))
+            os.system("ssh -i  {} {}@{} sudo docker rmi {}".format(path, username, IP, image))
         elif choice == "3":
             return
         else:
@@ -158,7 +162,7 @@ def KeyDockerImage(path,username,IP):
         os.system("clear")
 
 
-def KeyDockerContainer(path,username,IP):
+def KeyDockerContainer(path, username, IP):
     while True:
         os.system('tput setaf 4')
         print("""
@@ -179,16 +183,16 @@ def KeyDockerContainer(path,username,IP):
         elif choice == '3':
             name = input("Enter name: ")
             osname = input("Enter image [:]")
-            os.system("ssh -i  {} {}@{} sudo docker run -dit --name {} {}".format(path,username,IP,name,osname))
+            os.system("ssh -i  {} {}@{} sudo docker run -dit --name {} {}".format(path, username, IP, name, osname))
         elif choice == '4':
             name = input("Enter name/ID: ")
-            os.system("ssh -i  {} {}@{} sudo docker rm -f {}".format(path,username,IP,name))
+            os.system("ssh -i  {} {}@{} sudo docker rm -f {}".format(path, username, IP, name))
         elif choice == '5':
             name = input("Enter name/ID: ")
-            os.system("ssh -i  {} {}@{} sudo docker stop {}".format(path,username,IP,name))
+            os.system("ssh -i  {} {}@{} sudo docker stop {}".format(path, username, IP, name))
         elif choice == '6':
             name = input("Enter name/ID: ")
-            os.system("ssh -i  {} {}@{} sudo docker start {}".format(path,username,IP,name))
+            os.system("ssh -i  {} {}@{} sudo docker start {}".format(path, username, IP, name))
         elif choice == '7':
             return
         else:
@@ -198,7 +202,7 @@ def KeyDockerContainer(path,username,IP):
 
 
 #############################################################
-                #MainMenu#
+# MainMenu#
 ##############################################################
 def LocalDockerMenu():
     while True:
@@ -226,7 +230,9 @@ def LocalDockerMenu():
             print("Wrong choice")
         input("Enter to continue... ")
         os.system("clear")
-def remotePassMEnu(username,password,IP):
+
+
+def remotePassMEnu(username, password, IP):
     while True:
         os.system('tput setaf 4')
         print("""
@@ -253,7 +259,8 @@ def remotePassMEnu(username,password,IP):
         input("Enter to continue... ")
         os.system("clear")
 
-def keyDockerOS(path,username,IP):
+
+def keyDockerOS(path, username, IP):
     while True:
         os.system('tput setaf 4')
         print("""
@@ -283,6 +290,7 @@ def keyDockerOS(path,username,IP):
         input("Enter to continue... ")
         os.system("clear")
 
+
 def dockerMain():
     ostype = input("Enter local to work on local operating system\n"
                    "Enter remote to work on remote operating system\n"
@@ -295,14 +303,12 @@ def dockerMain():
         key_or_pass = input("Login using Key or password : ")
         if key_or_pass == "password":
             password = getpass.getpass()
-            remotePassMEnu(username,password,IP)
+            remotePassMEnu(username, password, IP)
         elif key_or_pass.lower() == "key":
             path = input("Enter key path [path/key.pem] : ")
-            keyDockerOS(path,username,IP)
+            keyDockerOS(path, username, IP)
         else:
             print("Wrong Choice")
     else:
         print("Wrong Choice")
         return
-
-

@@ -240,9 +240,9 @@ def authTypeKey(username, keyPath, ip):
             lv_name = input("ENTER NAME OF LV:")
             new_size = input("ENTER SIZE UPTO WHICH LV SHOULD BE REDUCED:")
             if 'n' == input("lv is mounted y/n: "):
-                os.system("ssh -i{} {}@{} sudo e2fsck -f /dev/{}/{}".format(keyPath, username, ip, vg_name, lv_name))
+                os.system("ssh -i {} {}@{} sudo e2fsck -f /dev/{}/{}".format(keyPath, username, ip, vg_name, lv_name))
                 os.system(
-                    "ssh -i{} {}@{} sudo lvreduce -r -L {}G /dev/{}/{}".format(keyPath, username, ip, new_size, vg_name,
+                    "ssh -i {} {}@{} sudo lvreduce -r -L {}G /dev/{}/{}".format(keyPath, username, ip, new_size, vg_name,
                                                                                lv_name))
             else:
                 print("please umount lv else you might loose online work")
