@@ -2,6 +2,8 @@ import os
 
 
 def installation():
+    os.chdir("key_script/kubernetes/installation")
+
     from distutils.spawn import find_executable
 
     os.chdir(os.getcwd() + '/Ansible')
@@ -58,4 +60,6 @@ def installation():
     if find_executable("ansible") is None:
         os.system(f"ansible-playbook setup.yml")
     os.chdir(os.getcwd() + "/../")
+
+    os.chdir("../../..")
 

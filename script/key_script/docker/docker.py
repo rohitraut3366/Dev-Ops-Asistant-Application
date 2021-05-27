@@ -6,9 +6,11 @@ from distutils.spawn import find_executable
 35.154.213.32
 /root/Desktop/FYProject/script/key_script/kubernetes/installation/Ansible/ARTH.pem
 """
+
+
 ########################################
 def docker_installation_service(username='root', ip='localhost', password="", key=""):
-
+    os.chdir('key_script/docker/')
     if password != '':
         with open("Ansible/inventory", "w+") as inventory:
             inventory.write(f"{ip} ansible_user={username} ansible_ssh_pass={password}\n")
@@ -30,6 +32,7 @@ def docker_installation_service(username='root', ip='localhost', password="", ke
         os.system(f"ansible-playbook setup.yml")
 
     os.chdir(os.getcwd() + "/../")
+    os.chdir('../../')
 
 
 def local_docker_image():
@@ -282,8 +285,8 @@ def key_docker_os(path, username, IP):
 
 def docker_main():
     os_type = input("\n\t\tEnter local to work on local operating system\n"
-                   "\t\tEnter remote to work on remote operating system\n"
-                   "\t\t:")
+                    "\t\tEnter remote to work on remote operating system\n"
+                    "\t\t:")
     if os_type == "local":
         local_docker_menu()
     elif os_type == 'remote':
