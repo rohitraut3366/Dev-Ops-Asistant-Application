@@ -2,21 +2,12 @@ import os
 
 
 def configure_client_service():
-    print("""
-    Press 1: Display Current Context
-    Press 2: Delete cluster
-    Press 3: Delete Context
-    Press 4: Delete user
-    Press 5: rename context
-    Press 6: set an individual value in a config file
-    Press 7: set Cluster
-    Press 8: Set context
-    Press 9: set Credentials
-    Press 10: Unset individual Value
-    Press 11: use context
-    Press 12: View
-    Press 13: return previous menu
-    """)
+    os.system('tput setaf 4')
+    print("\n\t\t\tPress 1: Display Current Context\n\t\t\tPress 2: Delete cluster\n\t\t\tPress 3: Delete Context\n\t\t\tPress 4: Delete user\n\t\t\tPress 5: rename context"
+    "\n\t\t\tPress 6: set an individual value in a config file\n\t\t\tPress 7: set Cluster\n\t\t\tPress 8: Set context\n\t\t\tPress 9: set Credentials"
+    "\n\t\t\tPress 10: Unset individual Value\n\t\t\tPress 11: use context\n\t\t\tPress 12: View\n\t\t\tPress 13: return previous menu")
+    os.system('tput setaf 7')
+
     choice = input("Enter your choice: ")
     if choice == '1':
         os.system("kubectl config current-context")

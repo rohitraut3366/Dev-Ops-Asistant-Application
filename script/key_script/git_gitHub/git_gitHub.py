@@ -4,6 +4,7 @@ import os
 # release branch /master branch /base branch
 def github():
     while True:
+        os.system('tput setaf 4')
         print("\t\tEnter 0: To check status of repository\n\t\tEnter 1: Initialize the git Repository\n\t\tEnter 2: Track the file. ADD in Staging Area"
             "\n\t\tEnter 3: Commit the Changes\n\t\tEnter 4: Get Time Line : version [ reference ] Log \n\t\tEnter 5: Check Logs"
             "\n\t\tEnter 6: RollBack/Rollout the Version\n\t\tEnter 7: Show Branch\n\t\tEnter 8: Create branch and switch to new Branch"
@@ -12,9 +13,12 @@ def github():
             "\n\t\tEnter 16: Show Data at point in time\n\t\tEnter 17: To show Diff between two commits\n\t\tEnter 18: Discard the changes in file"
             "\n\t\tEnter 19: To see author, parent and tree information about commit\n\t\tEnter 20: Clone repository\n\t\tEnter 21: merge final version of branch [merge(squash)]"
             "\n\t\tEnter 22: Rebase the branch\n\t\tEnter 23: Do the cherry-pick[get certain point-in-time backup data]"
-            "\n\t\tEnter 24: To do stash Operation\n\t\tEnter 25: Reset commit")
+            "\n\t\tEnter 24: To do stash Operation\n\t\tEnter 25: Reset commit\n\t\tEnter 26: return to previous menu")
+        os.system('tput setaf 7')
+
         Directory = input("\t\tEnter Repository[ Directory ] location: ")
         os.chdir(Directory)
+
         choice = input("\t\tEnter your choice: ")
         if choice == '0':
             os.system("git status")
@@ -122,3 +126,7 @@ def github():
             reset = input("\t\tEnter reset type [hard/soft/mixed]: ")
             reset_commits = input("\t\tEnter number of commits you want to reset: ")
             os.system(f"git reset --{reset} HEAD~{reset_commits}")
+        elif choice == '26':
+            return
+        else:
+            print("Wrong choice!\n please try again")
