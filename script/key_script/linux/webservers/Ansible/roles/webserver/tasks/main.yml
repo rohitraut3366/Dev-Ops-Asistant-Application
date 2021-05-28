@@ -1,0 +1,16 @@
+---
+# tasks file for webserver
+
+- name: "{{ ansible_facts['os_family'] }}"
+  include_vars: "{{ ansible_facts['os_family'] }}.yml"
+
+- name: Install apache webserver
+  package:
+    name: "{{ package }}"
+    state: present
+
+- name: start service
+  service: 
+    name: "{{ package }}"
+    state: started
+    enabled: true

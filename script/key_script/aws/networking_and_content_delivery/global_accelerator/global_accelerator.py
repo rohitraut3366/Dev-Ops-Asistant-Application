@@ -1,12 +1,12 @@
 import os
 
 
-
-def GlobalAccelerator:
+def GlobalAccelerator():
     print("""
-    Enter 1 : List
-    Enter 2 : Describe
-    Enter 3 : Create
+    Enter 1: List
+    Enter 2: Describe
+    Enter 3: Create
+    Enter 4: Delete
     """)
     choice = input("Enter your choice: ")
     if choice == '1':
@@ -73,10 +73,12 @@ def GlobalAccelerator:
                 os.system(f'aws globalaccelerator  describe-custom-routing-accelerator --accelerator-arn {acc_arn}')
             elif choice == '4':
                 acc_arn = input("Enter accelerator arn: ")
-                os.system(f'aws globalaccelerator  describe-custom-routing-accelerator-attributes --accelerator-arn {acc_arn}')
+                os.system(
+                    f'aws globalaccelerator  describe-custom-routing-accelerator-attributes --accelerator-arn {acc_arn}')
             elif choice == '5':
                 end_arn = input("Enter endpoint group arn: ")
-                os.system(f'aws globalaccelerator  describe-custom-routing-endpoint-group --endpoint-group-arn {end_arn}')
+                os.system(
+                    f'aws globalaccelerator  describe-custom-routing-endpoint-group --endpoint-group-arn {end_arn}')
             elif choice == '6':
                 l_arn = input("Enter listener arn: ")
                 os.system(f'aws globalaccelerator  describe-custom-routing-listener --listener-arn {l_arn}')
@@ -97,7 +99,7 @@ def GlobalAccelerator:
             Enter 4: create custom routing accelerator
             Enter 5: create custom routing endpoint group
             Enter 6: create custom routing listener
-            Enter 7: To exit
+            Enter 7: To return
             """)
             if choice == '1':
                 name = input("Enter Global Accelerator name: ")
@@ -105,7 +107,7 @@ def GlobalAccelerator:
                 for i in range(int(input("How many tags you want to add : "))):
                     key = input("Key: ")
                     value = input("Value: ")
-                    tags.append("Key="+key+","+"Value="+value)
+                    tags.append("Key=" + key + "," + "Value=" + value)
                 tags = "--tags ".join(tags)
                 os.system(f"aws globalaccelerator  create-accelerator --name {name} --tags {tags}")
             elif choice == '2':
@@ -118,18 +120,18 @@ def GlobalAccelerator:
                     os.system(
                         f"aws globalaccelerator create-listener --accelerator-arn {acc_arn}  FromPort={FromPort},ToPort={ToPort} --protocol {protocol} --client-affinity SOURCE_IP")
                 else:
-                    os.system(f"aws globalaccelerator create-listener --accelerator-arn {acc_arn}  FromPort={FromPort},ToPort={ToPort} --protocol {protocol}")
+                    os.system(
+                        f"aws globalaccelerator create-listener --accelerator-arn {acc_arn}  FromPort={FromPort},ToPort={ToPort} --protocol {protocol}")
             elif choice == '3':
                 l_arn = input("Enter listener arn: ")
                 end_point_region = input("Enter EndPoint Region: ")
                 health_check = input("Add Health Check : [Y/N]: ")
 
-
                 os.system(f"aws globalaccelerator create-endpoint-group "
-                        f"--listener-arn  {l_arn} "
-                        f"--endpoint-group-region {end_point_region} "
-                        f"--endpoint-configurations {a} "
-                        f"--traffic-dial-percentage {} ")
+                          f"--listener-arn  {l_arn} "
+                          f"--endpoint-group-region {end_point_region} "
+                          f"--endpoint-configurations {None} "
+                          f"--traffic-dial-percentage {None} ")
 
             elif choice == '4':
                 name = input("Enter GA name: ")
@@ -140,3 +142,11 @@ def GlobalAccelerator:
                     tags.append("Key=" + key + "," + "Value=" + value)
                 tags = "--tags ".join(tags)
                 os.system(f"aws globalaccelerator create-custom-routing-accelerator --name {name} --tags {tags}")
+            elif choice == '5':
+                pass
+            elif choice == '6':
+                pass
+            elif choice == '7':
+                return
+            else:
+                print("wrong choice!\n try again")

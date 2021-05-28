@@ -2,7 +2,7 @@ import os
 
 
 def cloudFront():
-    while (True):
+    while True:
         cf = input('Press 1: for creating distribution')
         if cf == "1":
             bucketnm = input("\n ENTER RESPECTIVE BUCKET NAME:")

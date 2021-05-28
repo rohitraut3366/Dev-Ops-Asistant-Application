@@ -1,7 +1,8 @@
 import getpass
 
 from key_script.aws.aws_menu import Aws
-from key_script.docker.docker import dockerMain
+from key_script.docker.docker import docker_main
+from key_script.git_gitHub.git_gitHub import github
 from key_script.hadoop.hadoop import HadoopMainMenu
 from key_script.kubernetes.kubernetes import kube_menu
 from key_script.linux.linux_menu import linux
@@ -14,24 +15,21 @@ if path.lower() == 'voice':
     pass
 elif path.lower() == 'keyboard':
     while True:
-        print("""
-Press 1 : AWS
-Press 2 : Docker
-Press 3 : Hadoop
-Press 4 : Kubernetes
-Press 5 : Linux/web server
-        """)
-        choice = input("Enter your choice: ")
+        print("Press 1 : AWS\nPress 2 : Docker\nPress 3 : Hadoop\nPress 4 : Kubernetes\nPress 5 : Linux/web server\n Press 6: Git Actions")
+
+        choice = input("\nEnter your choice: ")
         if choice == '1':
             Aws()
         elif choice == '2':
-            dockerMain()
+            docker_main()
         elif choice == '3':
             HadoopMainMenu()
         elif choice == '4':
             kube_menu()
         elif choice == '5':
             linux()
+        elif choice == '6':
+            github()
         elif choice == '6':
             exit(0)
         else:
