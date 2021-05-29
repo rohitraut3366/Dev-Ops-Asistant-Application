@@ -3,9 +3,13 @@ import os
 
 # release branch /master branch /base branch
 def github():
+    directory = input("\t\tEnter Repository[ Directory ] location: ")
+    os.system(f"git config --global user.email '{input('Enter your email: ')}'")
+    os.system(f"git config --global user.name '{input('Enter your name: ')}'")
     while True:
         os.system('tput setaf 4')
-        print("\t\tEnter 0: To check status of repository\n\t\tEnter 1: Initialize the git Repository\n\t\tEnter 2: Track the file. ADD in Staging Area"
+        print(
+            "\t\tEnter 0: To check status of repository\n\t\tEnter 1: Initialize the git Repository\n\t\tEnter 2: Track the file. ADD in Staging Area"
             "\n\t\tEnter 3: Commit the Changes\n\t\tEnter 4: Get Time Line : version [ reference ] Log \n\t\tEnter 5: Check Logs"
             "\n\t\tEnter 6: RollBack/Rollout the Version\n\t\tEnter 7: Show Branch\n\t\tEnter 8: Create branch and switch to new Branch"
             "\n\t\tEnter 9: Create New Branch\n\t\tEnter 10: To merge Branch\n\t\tEnter 11: To set Upstream Branch\n\t\tEnter 12: Add remote repository"
@@ -16,8 +20,9 @@ def github():
             "\n\t\tEnter 24: To do stash Operation\n\t\tEnter 25: Reset commit\n\t\tEnter 26: return to previous menu")
         os.system('tput setaf 7')
 
-        Directory = input("\t\tEnter Repository[ Directory ] location: ")
-        os.chdir(Directory)
+        os.chdir(directory)
+        if not directory:
+            os.chdir(".")
 
         choice = input("\t\tEnter your choice: ")
         if choice == '0':
@@ -25,13 +30,13 @@ def github():
         elif choice == '1':
             os.system("git init")
         elif choice == '2':
-            add_option = input("\n\t\tEnter 1 : Add Specific File"
-                               "\n\t\tEnter 2 : Track All file")
+            add_option = input("\n\t\tEnter 1 : Track All file"
+                               "\n\t\tEnter 2 : Add Specific File")
             if add_option == '1':
                 os.system("git add .")
             elif add_option == '2':
-                fileName = input("\t\tEnter File Name: ")
-                os.system(f"git add {fileName}")
+                file_name = input("\t\tEnter File Name: ")
+                os.system(f"git add {file_name}")
         elif choice == '3':
             commit_message = input()
             os.system(f"git commit -m {commit_message} .")
@@ -102,9 +107,9 @@ def github():
             repository = input('\t\tEnter Repository url: ')
             os.system(f"git clone {repository}")
         elif choice == '21':
-            Branch = input("\t\tmerge to master branch name: ")
+            branch = input("\t\tmerge to master branch name: ")
             os.system("git switch master")
-            os.system(f"git merge --squash {Branch}")
+            os.system(f"git merge --squash {branch}")
         elif choice == '22':
             rebase_branch = input("\t\tEnter the branch that you want to rebase")
             os.system(f"git checkout {rebase_branch}")
@@ -113,7 +118,8 @@ def github():
             commit_id = input("\t\tEnter commit-id from you want to pick the data [Point-in-time data]: ")
             os.system(f"git cherry-pick {commit_id}")
         elif choice == '24':
-            print("\n\t\tEnter 1: Stash [ Store un-committed in stash memory]\n\t\tEnter 2: list stash\n\t\tEnter 3: Restore data from stash memory")
+            print(
+                "\n\t\tEnter 1: Stash [ Store un-committed in stash memory]\n\t\tEnter 2: list stash\n\t\tEnter 3: Restore data from stash memory")
             stash_choice = input("\n\t\tEnter your choice: ")
             if stash_choice == '1':
                 os.system("git stash save")
@@ -121,7 +127,7 @@ def github():
                 os.system("git stash list")
             elif stash_choice == '3':
                 stash_num = input("\t\tEnter stash number: ")
-                os.system("git stash apply stash@{" + f"{stash_num}"+"}")
+                os.system("git stash apply stash@{" + f"{stash_num}" + "}")
         elif choice == '25':
             reset = input("\t\tEnter reset type [hard/soft/mixed]: ")
             reset_commits = input("\t\tEnter number of commits you want to reset: ")

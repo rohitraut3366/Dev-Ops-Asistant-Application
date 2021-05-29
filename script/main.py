@@ -1,21 +1,23 @@
 import getpass
 
+from key_script.BIGDATA.hadoop import HadoopMainMenu
 from key_script.aws.aws_menu import Aws
 from key_script.docker.docker import docker_main
 from key_script.git_gitHub.git_gitHub import github
-from key_script.hadoop.hadoop import HadoopMainMenu
+
 from key_script.kubernetes.kubernetes import kube_menu
 from key_script.linux.linux_menu import linux
 
 password = getpass.getpass()
 if password != "123":
     exit()
-path = input("How you want to communicate with this program: [Voice/Keyboard] :")
+path = "keyboard"
 if path.lower() == 'voice':
     pass
 elif path.lower() == 'keyboard':
     while True:
-        print("Press 1 : AWS\nPress 2 : Docker\nPress 3 : Hadoop\nPress 4 : Kubernetes\nPress 5 : Linux/web server\n Press 6: Git Actions")
+        print("Press 1 : AWS\nPress 2 : Docker\nPress 3 : Hadoop\nPress 4 : Kubernetes\nPress 5 : Linux/web "
+              "server\nPress 6 : Git Actions")
 
         choice = input("\nEnter your choice: ")
         if choice == '1':

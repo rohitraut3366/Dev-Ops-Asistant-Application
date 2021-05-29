@@ -15,7 +15,7 @@ def kube_menu():
     while True:
         print("\n\t\tEnter 1: For install Kubernetes multi Node Cluster\n\t\tEnter 2: For configure Client Program in your system\n\t\tEnter 3: For Pod\n\t\tEnter 4: For PVC #TO DO: implementation"
         "\n\t\tEnter 5: For PV #TO DO: Impl\n\t\tEnter 6: For ReplicationController\n\t\tEnter 7: For Replica Set\n\t\tEnter 8: For Secret #TO DO: IMPL\n\t\tEnter 9: For Service #TO DO: IMPL"
-        "\n\t\tEnter 10: For Node #TO DO: IMPL\n\t\tEnter 11: Role and ROle Bindings #TO DO: IMPL\n\t\tEnter 12: Return to Previous Menu")
+        "\n\t\tEnter 10: For List Node #TO DO: IMPL\n\t\tEnter 11: Role and ROle Bindings #TO DO: IMPL\n\t\tEnter 12: Return to Previous Menu")
         choice = input("\t\tEnter your choice: ")
         if choice == '1':
             installation()

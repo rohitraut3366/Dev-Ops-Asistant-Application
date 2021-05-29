@@ -17,9 +17,9 @@ def Aws():
             compute()
         elif choice == '2':
             pass
+        elif choice == '3':
+            return
         else:
-            if choice == '3':
-                print("\tWrong choice")
-                return
+            print("\tWrong choice")
             print("\tTry Again")
         os.system("clear")

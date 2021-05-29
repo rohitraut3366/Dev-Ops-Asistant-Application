@@ -44,7 +44,7 @@ def local_docker_image():
         choice = input("\t\tEnter : ")
         if choice == '1':
             os.system("docker images")
-        if choice == "2":
+        elif choice == "2":
             image = input("\t\tEnter image  name[os]:version ")
             os.system("docker pull {}".format(image))
         elif choice == "3":

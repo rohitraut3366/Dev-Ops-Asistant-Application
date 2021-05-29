@@ -1,2 +1,5 @@
+import os
+
+
 def node_service():
-    pass
+    os.system("kubectl get nodes")
